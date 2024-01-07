@@ -16,4 +16,11 @@
       $this->view('pages/index', $data);
     }
 
+    public function AuthRegister(){
+      $this->view('Auth/register');
+    }
+    public function AuthLogin(){
+      $this->view('Auth/login');
+    }
+
   }

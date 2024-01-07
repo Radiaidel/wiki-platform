@@ -7,5 +7,12 @@ class CategoryController extends Controller
     {
         $this->CategoryModel = $this->model('Category');
     }
+
+    public function GetAllCategories() {
+        $categoryModel = $this->model('Category');
+        $categories = $categoryModel->getAllCategories();
+    
+        $this->view('pages/category', ['categories' => $categories]);
+    }
 }
 ?>

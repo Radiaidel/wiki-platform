@@ -17,5 +17,10 @@ class Category
 
         return $this->db->execute();
     }
+
+    public function getAllCategories() {
+        $this->db->query('SELECT * FROM Categories');
+        return $this->db->resultSet();
+    }
 }
 ?>

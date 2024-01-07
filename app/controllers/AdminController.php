@@ -25,25 +25,25 @@ class AdminController extends Controller
                 } else {
                     echo 'Sorry, there was a problem uploading your file.';
                     $_SESSION['message'] = ['type' => 'error', 'text' => 'Sorry, there was a problem uploading your file.'];
-                    header('Location: ' . URLROOT . '/pages/categorie');
+                    header('Location: ' . URLROOT . '/CategoryController/GetAllCategories');
                 }
             } else {
                 // Gestion des erreurs d'upload
                 $_SESSION['message'] = ['type' => 'error', 'text' => 'No file uploaded.'];
-                header('Location: ' . URLROOT . '/pages/categorie');
+                header('Location: ' . URLROOT . '/CategoryController/GetAllCategories');
             }
 
             $added = $this->categoryModel->addCategory($categoryName, $categoryPicture);
 
             if ($added) {
                 $_SESSION['message'] = ['type' => 'success', 'text' => 'New category added successfully.'];
-                header('Location: ' . URLROOT . '/pages/categorie');
+                header('Location: ' . URLROOT . '/CategoryController/GetAllCategories');
                 exit();
             } else {
                 $_SESSION['message'] = ['type' => 'error', 'text' => 'Operation failed. Please try again.'];
             }
         } else {
-            header('Location: ' . URLROOT . '/pages/categorie');
+            header('Location: ' . URLROOT . '/CategoryController/GetAllCategories');
             exit();
         }
     }

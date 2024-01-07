@@ -19,7 +19,7 @@ class UserController extends Controller
             if (isset($_FILES['profilePicture']) && $_FILES['profilePicture']['error'] === UPLOAD_ERR_OK) {
                 $targetDirectory = "upload/";
                 $targetPath = $targetDirectory . basename($_FILES['profilePicture']['name']);
-             
+
                 if (!file_exists($targetDirectory)) {
                     mkdir($targetDirectory, 0755, true);
                 }
@@ -39,11 +39,11 @@ class UserController extends Controller
                 return;
             }
 
-            $newuser = $userModel->registerUser($name, $email, $hashedPassword,$profilePicture);
+            $newuser = $userModel->registerUser($name, $email, $hashedPassword, $profilePicture);
             if ($newuser) {
                 $_SESSION['message'] = ['type' => 'success', 'text' => 'Registration successful.'];
                 header('Location: ' . URLROOT . '/Auth/login');
-                exit(); 
+                exit();
             } else {
                 $_SESSION['message'] = ['type' => 'error', 'text' => 'Registration failed. Please try again.'];
             }
@@ -63,8 +63,18 @@ class UserController extends Controller
 
             if ($user && password_verify($password, $user->password)) {
                 $_SESSION['user_id'] = $user->user_id;
+                $_SESSION['user_name'] = $user->username;
+                $_SESSION['user_role'] = $user->role;
+                $_SESSION['userprofile'] = $user->profile_picture;
+
                 $_SESSION['message'] = ['type' => 'success', 'text' => 'Login successful.'];
-                header('Location: ' . URLROOT . '/Pages/index');
+                if ($_SESSION['user_role'] == "admin") {
+                    header('Location: ' . URLROOT . '/Pages/dashboard');
+
+                } elseif ($_SESSION['user_role'] == "auteur") {
+
+                    header('Location: ' . URLROOT . '/Pages/index');
+                }
                 exit();
             } else {
                 $_SESSION['message'] = ['type' => 'error', 'text' => 'Invalid email or password'];

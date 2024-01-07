@@ -45,9 +45,9 @@ function validateFormRegister() {
 }
 
 
-function displayImage() {
-    var input = document.getElementById('profilePicture');
-    var label = document.getElementById('profilePictureLabel');
+function displayImage(onlabel,inInput) {
+    var input = document.getElementById(inInput);
+    var label = document.getElementById(onlabel);
 
     var file = input.files[0];
 
@@ -97,4 +97,11 @@ function validateFormLogin() {
 function toggleDropdown() {
     var dropdownContent = document.getElementById('dropdown-content');
     dropdownContent.classList.toggle('hidden');
+}
+function ShowForm(formname,closeModal){
+        document.getElementById(formname).classList.remove('hidden');
+        document.getElementById(closeModal).addEventListener('click', () => {
+            document.getElementById(formname).classList.add('hidden');
+            document.getElementById(formname).reset();
+        });
 }

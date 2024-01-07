@@ -15,12 +15,20 @@
       // Load homepage/index view
       $this->view('pages/index', $data);
     }
-
+    
     public function AuthRegister(){
       $this->view('Auth/register');
     }
     public function AuthLogin(){
       $this->view('Auth/login');
     }
-
+    public function dashboard(){
+        $this->view('pages/Dashboard');
+    }
+    public function categorie(){
+      $this->view('pages/category');
+  }
+  public function tag(){
+    $this->view('pages/tags');
+}
   }

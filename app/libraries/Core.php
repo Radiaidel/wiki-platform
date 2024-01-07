@@ -30,7 +30,7 @@ class Core
 
     // Instantiate the current controller
     $this->currentController = new $this->currentController;
-
+    
     // Check if second part of url is set (method)
     if (isset($url[1])) {
       // Check if method/function exists in current controller class
@@ -60,3 +60,4 @@ class Core
     }
   }
 }
+?>

@@ -2,10 +2,13 @@
 class AdminController extends Controller
 {
     private $categoryModel;
+    private $tagModel;
 
     public function __construct()
     {
         $this->categoryModel = $this->model('Category');
+        $this->tagModel = $this->model('Tags');
+
     }
     public function AddNewCategory()
     {
@@ -105,12 +108,59 @@ class AdminController extends Controller
                 $_SESSION['message'] = ['type' => 'error', 'text' => 'Failed to delete category. Please try again.'];
             }
 
-            header('Location: ' . URLROOT . '/CategoryController/GetAllCategories');
-            exit();
+
         } else {
-            redirect('pages/error');
+            $_SESSION['message'] = ['type' => 'error', 'text' => 'Failed to delete category. Please try again.'];
         }
+        header('Location: ' . URLROOT . '/CategoryController/GetAllCategories');
+        exit();
     }
+
+    public function getCategoriesAndTags()
+    {
+        $categories = $this->categoryModel->getAllCategories();
+
+        $data = [];
+
+        foreach ($categories as $category) {
+            $categoryName = $category->category_name;
+            $tags = $this->tagModel->getTagsByCategory($category->category_id);
+
+            $data['categories'][$categoryName] = [
+                'category_id' => $category->category_id,
+                'tags' => $tags,
+            ];
+        }
+        $this->view('pages/tags', ['Tagcategories' => $data]);
+
+    }
+
+    // AdminController.php
+
+    public function addNewTag()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['categoryId'], $_POST['tagName'])) {
+                $categoryId = $_POST['categoryId'];
+                $tagName = htmlspecialchars(trim($_POST['tagName']));
+
+                $success = $this->tagModel->addNewTag($categoryId, $tagName);
+
+                if ($success) {
+                    $_SESSION['message'] = ['type' => 'success', 'text' => 'New tag added successfully.'];
+
+                } else {
+                    $_SESSION['message'] = ['type' => 'error', 'text' => 'Operation failed. Please try again.'];
+
+                }
+            } else {
+                $_SESSION['message'] = ['type' => 'error', 'text' => 'Operation failed. Please try again.'];
+            }
+        }
+        header('Location: ' . URLROOT . '/AdminController/getCategoriesAndTags');
+        exit();
+    }
+
 
 }
 ?>

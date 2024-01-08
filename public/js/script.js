@@ -106,18 +106,19 @@ function ShowForm(formname, closeModal) {
 }
 
 function confirmDelete(formid) {
-    var result = confirm("Êtes-vous sûr de vouloir supprimer ce projet?");
+    var result = confirm("Are you sure you want to delete this category?");
 
     if (result) {
         document.getElementById(formid).submit();
+    }else{
+        event.preventDefault();
     }
 }
 
-function GetButton(){
-
-    document.querySelectorAll('.editCategory').forEach(button => {
+function GetButton(classbtn, functionshow) {
+    document.querySelectorAll(classbtn).forEach(button => {
         button.addEventListener('click', function () {
-            ShowEditForm(button);
+            window[functionshow](button);
         });
     });
 }
@@ -135,14 +136,13 @@ function ShowEditForm(button) {
         editCategoryForm.querySelector('#categoryName').value = button.dataset.categoryName || '';
         editCategoryForm.querySelector('#categoryId').value = button.dataset.categoryId || '';
         var imageUrl = button.dataset.categoryPicture || '';
-        console.log(imageUrl);
         displayImageforEdit('categorypictureedit', imageUrl);
         editCategoryForm.classList.remove('hidden');
     }
 
     function displayImageforEdit(labelid,url) {
+
         const label = document.getElementById(labelid);
-        // preview.src = imageUrl;
 
         label.style.backgroundImage = 'url(' + url + ')';
         label.style.backgroundSize = 'cover';
@@ -152,3 +152,37 @@ function ShowEditForm(button) {
     }
 }
 
+
+
+    function ShowTagDetailsForm(tagElement) {
+        document.getElementById('closeTagDetails').addEventListener('click', () => {
+            document.getElementById('TagDetails').classList.add('hidden');
+        }); 
+    
+        var TagDetails = document.getElementById('TagDetails');
+        TagDetails.classList.remove('hidden');
+        var tagId = tagElement.getAttribute('data-tag-id');
+        var tagName = tagElement.getAttribute('data-tag-name');
+        var categoryId = tagElement.getAttribute('data-category-id');
+    
+        // Remplissez le formulaire avec les données du tag
+        document.getElementById('TagForm').querySelector('#categoryId').value = categoryId;
+        document.getElementById('TagForm').querySelector('#tagName').value = tagName;
+        document.getElementById('TagForm').querySelector('#tagId').value = tagId;
+
+        // Affichez le formulaire de détails du tag
+        document.getElementById('TagDetails').classList.remove('hidden');
+        
+        // Ajoutez d'autres actions que vous souhaitez effectuer ici
+    }
+
+    function confirmDeleteTag(formid) {
+        var result = confirm("Are you sure you want to delete this tag?");
+    
+        if (result) {
+            document.getElementById(formid).submit();
+        }
+        else{
+            event.preventDefault();
+        }
+    }

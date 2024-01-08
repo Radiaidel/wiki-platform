@@ -23,5 +23,24 @@ class Tags
 
         return $this->db->execute();
     }
+
+
+    public function updateTag($id_tag,$id_category,$name_tag) {
+        $this->db->query('UPDATE Tags SET tag_name = :tagName ,  category_id = :categoryId where tag_id = :tagId');
+        $this->db->bind(':categoryId', $id_category);
+        $this->db->bind(':tagId',$id_tag);
+        $this->db->bind(':tagName', $name_tag);
+
+        return  $this->db->execute();
+
+    }
+
+    public function deleteTag($id_tag) {
+        $this->db->query('DELETE FROM Tags WHERE tag_id = :tagId');
+        $this->db->bind(':tagId', $id_tag);
+
+        return  $this->db->execute();
+
+    }
 }
 ?>

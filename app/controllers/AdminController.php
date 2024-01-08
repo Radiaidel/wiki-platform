@@ -161,6 +161,37 @@ class AdminController extends Controller
         exit();
     }
 
+    public function UD_Tag() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $id_category = $_POST['categoryId'];
+            $id_tag = $_POST['tagId'];
+            $name_tag = $_POST['tagName'];
+
+            if (isset($_POST['updatetagbtn'])) {
+                $success= $this->tagModel->updateTag($id_tag,$id_category,$name_tag);
+                if ($success) {
+                    $_SESSION['message'] = ['type' => 'success', 'text' => 'Tag updated successfully.'];
+
+                } else {
+                    $_SESSION['message'] = ['type' => 'error', 'text' => 'Operation failed. Please try again.'];
+
+                }
+            } elseif (isset($_POST['deletetagbtn'])) {
+                $success=$this->tagModel->deleteTag($id_tag);
+                if ($success) {
+                    $_SESSION['message'] = ['type' => 'success', 'text' => 'Tag deleted successfully.'];
+
+                } else {
+                    $_SESSION['message'] = ['type' => 'error', 'text' => 'Operation failed. Please try again.'];
+
+                }
+            }
+        }
+        header('Location: ' . URLROOT . '/AdminController/getCategoriesAndTags');
+        exit();
+    }
+
 
 }
 ?>

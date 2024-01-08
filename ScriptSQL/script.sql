@@ -20,6 +20,7 @@ CREATE TABLE Tags (
 
 CREATE TABLE Wikis (
     wiki_id INT PRIMARY KEY AUTO_INCREMENT,
+    image_wiki VARCHAR(255),
     title VARCHAR(255),
     content TEXT,
     author_id INT,

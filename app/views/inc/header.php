@@ -79,7 +79,7 @@
 
 
                                 <?php elseif (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "auteur"): ?>
-                                    <a href="#" class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Add new
+                                    <a href="<?php echo URLROOT; ?>/CategoryController/New_wiki" class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Add new
                                         wiki</a>
                                     <a href="<?php echo URLROOT; ?>/UserController/LogOut" class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Log out</a>
 

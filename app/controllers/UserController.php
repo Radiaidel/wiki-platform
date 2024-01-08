@@ -73,7 +73,7 @@ class UserController extends Controller
 
                 } elseif ($_SESSION['user_role'] == "auteur") {
 
-                    header('Location: ' . URLROOT . '/Pages/index');
+                    header('Location: ' . URLROOT . '/WikiController/index');
                 }
                 exit();
             } else {

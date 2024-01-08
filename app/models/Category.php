@@ -22,5 +22,25 @@ class Category
         $this->db->query('SELECT * FROM Categories');
         return $this->db->resultSet();
     }
+    public function updateCategory($categoryId, $categoryName,$categoryPicture) {
+        $this->db->query('UPDATE categories SET category_name = :categoryName , category_picture =:categoryPicture WHERE category_id = :categoryId');
+        $this->db->bind(':categoryId', $categoryId);
+        $this->db->bind(':categoryName', $categoryName);
+        $this->db->bind(':categoryPicture', $categoryPicture);
+
+
+        // Exécuter la requête
+        return $this->db->execute();
+    }
+    public function deleteCategoryById($categoryId) {
+        $this->db->query('DELETE FROM Categories WHERE category_id = :categoryId');
+        $this->db->bind(':categoryId', $categoryId);
+
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false; 
+        }
+    }
 }
 ?>

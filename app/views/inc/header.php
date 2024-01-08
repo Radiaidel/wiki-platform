@@ -25,7 +25,7 @@
                     </div>
                     <div class="relative sm:flex items-center ml-10">
                         <!-- Removed sm:hidden to keep the search bar always visible -->
-                        <input type="text" placeholder=""
+                        <input type="text" placeholder="Rechercher ..."
                             class="h-10 w-48 sm:w-96 px-4 text-sm text-white placeholder-white bg-gray-700 rounded-full focus:outline-none focus:shadow-none">
                         <svg class="absolute right-3 top-3 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -44,6 +44,7 @@
                             <button
                                 class="flex items-center max-w-xs text-sm text-white rounded-full focus:outline-none focus:shadow-solid"
                                 id="user-menu" aria-label="User menu" aria-haspopup="true" onclick="toggleDropdown()">
+                                <span class="hidden md:inline-block ml-2 text-white mr-4"><?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Guest'; ?></span>
                                 <img  class="w-12 h-12 rounded-full"
                                     src="<?php echo isset($_SESSION['userprofile']) ? URLROOT . '/public/'.$_SESSION["userprofile"]: 'https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg'; ?>"
                                     alt="User" />

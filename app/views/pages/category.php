@@ -35,6 +35,7 @@
 
                         <svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                             fill="#000000">
+                            
 
                             <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
@@ -158,7 +159,7 @@
 
                         </svg>
                     </label>
-
+                    <!-- <input type="file" id="Inputcategorypicture" name="Inputcategorypicture" accept="image/*" class="hidden" required> -->
                     <input type="file" id="Inputcategorypicture" name="Inputcategorypicture" accept="image/*" class="hidden"
                         onchange="displayImage('categorypictureedit', 'Inputcategorypicture')" required> 
                     <input type="hidden" name="categoryId" id="categoryId">
@@ -166,7 +167,7 @@
                         class="p-2 w-full border border-2 border-gray-600 rounded-md " required />
                 </div>
 
-                <button type="submit"
+                <button type="submit" id="updateCat"
                     class="w-full text-white bg-gray-500 rounded-full text-sm px-5 py-2.5" >Update Category</button>
             </form>
 

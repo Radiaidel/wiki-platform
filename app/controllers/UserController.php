@@ -84,6 +84,16 @@ class UserController extends Controller
             $this->view('Auth/login');
         }
     }
+    public function LogOut(){
+        session_start();
+
+        $_SESSION = array();
+
+        session_destroy();
+
+        header('Location: ' . URLROOT . '/Pages/index');
+        exit();
+    }
 
 }
 ?>

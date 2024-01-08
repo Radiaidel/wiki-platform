@@ -6,14 +6,8 @@
 
     // Load Homepage
     public function index(){
-      //Set Data
-      $data = [
-        'title' => 'Welcome To SharePosts',
-        'description' => 'Simple social network built on the TraversyMVC PHP framework'
-      ];
 
-      // Load homepage/index view
-      $this->view('pages/index', $data);
+      $this->view('pages/index');
     }
     
     public function AuthRegister(){

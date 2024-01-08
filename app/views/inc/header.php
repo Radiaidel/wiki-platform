@@ -75,11 +75,13 @@
 
                                 <a href="<?php echo URLROOT; ?>/Pages/index"
                                     class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Accueil</a>
+                                    <a href="<?php echo URLROOT; ?>/UserController/LogOut" class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Log out</a>
+
 
                                 <?php elseif (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "auteur"): ?>
                                     <a href="#" class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Add new
                                         wiki</a>
-                                    <a href="#" class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Log out</a>
+                                    <a href="<?php echo URLROOT; ?>/UserController/LogOut" class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Log out</a>
 
                                 <?php else: ?>
                                     <a href="<?php echo URLROOT; ?>/Pages/AuthLogin"

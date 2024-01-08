@@ -110,7 +110,7 @@ function confirmDelete(formid) {
 
     if (result) {
         document.getElementById(formid).submit();
-    }else{
+    } else {
         event.preventDefault();
     }
 }
@@ -122,7 +122,6 @@ function GetButton(classbtn, functionshow) {
         });
     });
 }
-
 function ShowEditForm(button) {
     document.getElementById('closeBtnedit').addEventListener('click', () => {
         document.getElementById('EditCategory').classList.add('hidden');
@@ -139,11 +138,11 @@ function ShowEditForm(button) {
         displayImageforEdit('categorypictureedit', imageUrl);
         editCategoryForm.classList.remove('hidden');
     }
-
+    
     function displayImageforEdit(labelid,url) {
-
         const label = document.getElementById(labelid);
-
+        // preview.src = imageUrl;
+        
         label.style.backgroundImage = 'url(' + url + ')';
         label.style.backgroundSize = 'cover';
         label.style.backgroundPosition = 'center';
@@ -151,38 +150,67 @@ function ShowEditForm(button) {
         document.getElementById('PlusIcon').style.display = 'none';
     }
 }
+// function ShowEditForm(button) {
+//     isImageChanged = false;
+
+//     document.getElementById('closeBtnedit').addEventListener('click', () => {
+//         document.getElementById('EditCategory').classList.add('hidden');
+//     });
+
+//     var editCategoryForm = document.getElementById('EditCategoryForm');
+//     var overlay = document.getElementById('EditCategory');
+//     overlay.classList.remove('hidden');
+
+//     if (editCategoryForm) {
+//         editCategoryForm.querySelector('#categoryName').value = button.dataset.categoryName || '';
+//         editCategoryForm.querySelector('#categoryId').value = button.dataset.categoryId || '';
+//         var imageUrl = button.dataset.categoryPicture || '';
+
+//         displayImageforEdit('categorypictureedit', imageUrl);
+//         editCategoryForm.classList.remove('hidden');
+//     }
+
+//     function displayImageforEdit(labelid, url) {
+//         const label = document.getElementById(labelid);
+//         label.style.backgroundImage = 'url(' + url + ')';
+//         label.style.backgroundSize = 'cover';
+//         label.style.backgroundPosition = 'center';
+//         label.style.border = 'none';
+//         document.getElementById('PlusIcon').style.display = 'none';
+
+//     }
+// }
 
 
 
-    function ShowTagDetailsForm(tagElement) {
-        document.getElementById('closeTagDetails').addEventListener('click', () => {
-            document.getElementById('TagDetails').classList.add('hidden');
-        }); 
-    
-        var TagDetails = document.getElementById('TagDetails');
-        TagDetails.classList.remove('hidden');
-        var tagId = tagElement.getAttribute('data-tag-id');
-        var tagName = tagElement.getAttribute('data-tag-name');
-        var categoryId = tagElement.getAttribute('data-category-id');
-    
-        // Remplissez le formulaire avec les données du tag
-        document.getElementById('TagForm').querySelector('#categoryId').value = categoryId;
-        document.getElementById('TagForm').querySelector('#tagName').value = tagName;
-        document.getElementById('TagForm').querySelector('#tagId').value = tagId;
 
-        // Affichez le formulaire de détails du tag
-        document.getElementById('TagDetails').classList.remove('hidden');
-        
-        // Ajoutez d'autres actions que vous souhaitez effectuer ici
+
+function ShowTagDetailsForm(tagElement) {
+    document.getElementById('closeTagDetails').addEventListener('click', () => {
+        document.getElementById('TagDetails').classList.add('hidden');
+    });
+
+    var TagDetails = document.getElementById('TagDetails');
+    TagDetails.classList.remove('hidden');
+    var tagId = tagElement.getAttribute('data-tag-id');
+    var tagName = tagElement.getAttribute('data-tag-name');
+    var categoryId = tagElement.getAttribute('data-category-id');
+
+    document.getElementById('TagForm').querySelector('#categoryId').value = categoryId;
+    document.getElementById('TagForm').querySelector('#tagName').value = tagName;
+    document.getElementById('TagForm').querySelector('#tagId').value = tagId;
+
+    document.getElementById('TagDetails').classList.remove('hidden');
+
+}
+
+function confirmDeleteTag(formid) {
+    var result = confirm("Are you sure you want to delete this tag?");
+
+    if (result) {
+        document.getElementById(formid).submit();
     }
-
-    function confirmDeleteTag(formid) {
-        var result = confirm("Are you sure you want to delete this tag?");
-    
-        if (result) {
-            document.getElementById(formid).submit();
-        }
-        else{
-            event.preventDefault();
-        }
+    else {
+        event.preventDefault();
     }
+}

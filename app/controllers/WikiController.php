@@ -58,4 +58,33 @@ class WikiController extends Controller
             echo "Wiki not found!";
         }
     }
+
+    public function Mywikis(){
+        $wikis = $this->wikiModel->getMyWikis();
+
+        $categories = $this->CategoryModel->getAllCategories();
+
+        $categoryTags = [];
+        foreach ($categories as $category) {
+            $tags = $this->tagModel->getTagsByCategory($category->category_id);
+            $categoryTags[$category->category_id] = $tags;
+        }
+
+        $data = [
+            'categories' => $categories,
+            'categoryTags' => $categoryTags,
+            'wikis' => $wikis,
+        ];
+        $this->view('Pages/MyWikis', $data);
+
+        if (isset($_GET['url']) && $_GET['url'] === 'WikiController/index/addForm') {
+
+            echo '<script >
+            document.getElementById("AddWiki").classList.remove("hidden");
+            document.getElementById("closeModalBtnwiki").addEventListener("click", function() {
+                document.getElementById("AddWiki").classList.add("hidden");
+            });
+          </script>';
+        } 
+    }
 }

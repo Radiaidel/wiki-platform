@@ -88,6 +88,9 @@
                                     <a href="<?php echo URLROOT; ?>/WikiController/index/addForm"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Add new
                                         wiki</a>
+                                        <a href="<?php echo URLROOT; ?>/WikiController/Mywikis"
+                                        class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">My
+                                        wikis</a>
                                     <a href="<?php echo URLROOT; ?>/UserController/LogOut"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Log out</a>
 

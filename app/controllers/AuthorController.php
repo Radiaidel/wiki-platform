@@ -115,7 +115,7 @@ class AuthorController extends Controller
                 $_SESSION['message'] = ['type' => 'error', 'text' => 'Failed to add wiki. Please try again.'];
             }
         }
-        header('Location: ' . URLROOT . '/WikiController/index');
+        header('Location: ' . URLROOT . '/WikiController/Mywikis');
         exit();
     }
 }

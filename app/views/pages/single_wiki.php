@@ -2,7 +2,7 @@
 <?php require APPROOT . '/views/inc/messages.php'; ?>
 
 <div class="container mx-auto mt-3">
-    <div class="max-w-3xl mx-auto md:px-8 px-2 bg-white ">
+    <div class="max-w-3xl mx-auto md:px-8 md:py-3 p-2 bg-white ">
         <!-- Category Name -->
         <div class="mb-4 text-gray-500">>
             <?= $data['wiki']->category_name; ?>

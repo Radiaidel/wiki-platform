@@ -194,16 +194,76 @@ function confirmDeleteWiki(formid) {
     }
 }
 
-
-
-function EditWikiForm(button) {
-    document.getElementById('closeModalBtnEditWiki').addEventListener('click', () => {
+function ShowEditWikiForm(button) {
+    document.getElementById('closeBtnEditWiki').addEventListener('click', () => {
         document.getElementById('EditWiki').classList.add('hidden');
     });
 
-    var editCategoryForm = document.getElementById('EditWiki');
+    var editWikiForm = document.getElementById('editWikiForm');
     var overlay = document.getElementById('EditWiki');
     overlay.classList.remove('hidden');
 
+    if (editWikiForm) {
+        editWikiForm.querySelector('#editTitle').value = button.dataset.wikiTitle || '';
+        editWikiForm.querySelector('#editContent').value = button.dataset.wikiContent || '';
+        editWikiForm.querySelector('#wikiId').value = button.dataset.wikiId || '';
+        editWikiForm.querySelector('#editCategoryId').value = button.dataset.wikiCategoryId || '';
+
+
+        displayImageforEdit('editImage', button.dataset.wikiImage);
+
+        // Display tags
+        displayTagsForEdit('editSelectedTagsInput', 'editTagsContainer', button.dataset.wikiTags);
+
+
+
+        editWikiForm.classList.remove('hidden');
+    }
 
 }
+
+
+function displayImageforEdit(inputId, url) {
+    const inputElement = document.getElementById(inputId);
+    const urlParts = url.split('/upload/'); 
+    const fileName = urlParts.length > 1 ? urlParts[1] : ''; 
+
+    inputElement.previousElementSibling.textContent = fileName; 
+    inputElement.value = ''; 
+}
+
+
+function displayTagsForEdit(inputId, containerId, tags) {
+    const selectedTagsInput = document.getElementById(inputId);
+    const tagsContainer = document.getElementById(containerId);
+
+    let tagsArray = tags.split(',').map(tag => tag.trim());
+
+    tagsContainer.innerHTML = "";
+
+    tagsArray.forEach(function (tag) {
+        if (tag) { 
+            var tagButton = document.createElement("button");
+            tagButton.textContent = tag;
+            tagButton.type = "button";
+            tagButton.classList.add("bg-blue-200", "text-blue-800", "text-sm", "font-medium", "me-2", "cursor-pointer", "px-3", "py-1", "rounded");
+
+            tagButton.addEventListener("click", function () {
+                this.classList.toggle("bg-blue-500");
+                if (tagsArray.includes(tag)) {
+                    tagsArray = tagsArray.filter(t => t !== tag);
+                } else {
+                    tagsArray.push(tag);
+                }
+                selectedTagsInput.value = tagsArray.join(', ');
+            });
+
+            tagsContainer.appendChild(tagButton);
+        }
+    });
+}
+
+
+
+
+

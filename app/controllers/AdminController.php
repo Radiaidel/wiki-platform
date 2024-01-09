@@ -4,10 +4,14 @@ class AdminController extends Controller
     private $categoryModel;
     private $tagModel;
 
+    private $wikiModel;
+
     public function __construct()
     {
         $this->categoryModel = $this->model('Category');
         $this->tagModel = $this->model('Tags');
+        $this->wikiModel = $this->model('Wiki');
+
 
     }
     public function AddNewCategory()
@@ -191,7 +195,22 @@ class AdminController extends Controller
         header('Location: ' . URLROOT . '/AdminController/getCategoriesAndTags');
         exit();
     }
+    public function archiveWiki()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $wikiId = $_POST['wikiId'];
 
+            $archived= $this->wikiModel->archiveWikiById($wikiId);
+            if ($archived) {
+                $_SESSION['message'] = ['type' => 'success', 'text' => 'Wiki  archived successfully.'];
+            } else {
+                $_SESSION['message'] = ['type' => 'error', 'text' => 'Failed to archive wiki. Please try again.'];
+            }
+        }
+        header("Location: " . URLROOT . "/WikiController/index");
+        exit();
+    }
+    
 
 }
 ?>

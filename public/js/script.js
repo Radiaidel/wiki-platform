@@ -150,39 +150,6 @@ function ShowEditForm(button) {
         document.getElementById('PlusIcon').style.display = 'none';
     }
 }
-// function ShowEditForm(button) {
-//     isImageChanged = false;
-
-//     document.getElementById('closeBtnedit').addEventListener('click', () => {
-//         document.getElementById('EditCategory').classList.add('hidden');
-//     });
-
-//     var editCategoryForm = document.getElementById('EditCategoryForm');
-//     var overlay = document.getElementById('EditCategory');
-//     overlay.classList.remove('hidden');
-
-//     if (editCategoryForm) {
-//         editCategoryForm.querySelector('#categoryName').value = button.dataset.categoryName || '';
-//         editCategoryForm.querySelector('#categoryId').value = button.dataset.categoryId || '';
-//         var imageUrl = button.dataset.categoryPicture || '';
-
-//         displayImageforEdit('categorypictureedit', imageUrl);
-//         editCategoryForm.classList.remove('hidden');
-//     }
-
-//     function displayImageforEdit(labelid, url) {
-//         const label = document.getElementById(labelid);
-//         label.style.backgroundImage = 'url(' + url + ')';
-//         label.style.backgroundSize = 'cover';
-//         label.style.backgroundPosition = 'center';
-//         label.style.border = 'none';
-//         document.getElementById('PlusIcon').style.display = 'none';
-
-//     }
-// }
-
-
-
 
 
 function ShowTagDetailsForm(tagElement) {
@@ -214,4 +181,7 @@ function confirmDeleteTag(formid) {
         event.preventDefault();
     }
 }
+
+
+
 

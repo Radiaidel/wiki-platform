@@ -44,9 +44,11 @@
                             <button
                                 class="flex items-center max-w-xs text-sm text-white rounded-full focus:outline-none focus:shadow-solid"
                                 id="user-menu" aria-label="User menu" aria-haspopup="true" onclick="toggleDropdown()">
-                                <span class="hidden md:inline-block ml-2 text-white mr-4"><?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Guest'; ?></span>
-                                <img  class="w-12 h-12 rounded-full"
-                                    src="<?php echo isset($_SESSION['userprofile']) ? URLROOT . '/public/'.$_SESSION["userprofile"]: 'https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg'; ?>"
+                                <span class="hidden md:inline-block ml-2 text-white mr-4">
+                                    <?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Guest'; ?>
+                                </span>
+                                <img class="w-12 h-12 rounded-full"
+                                    src="<?php echo isset($_SESSION['userprofile']) ? URLROOT . '/public/' . $_SESSION["userprofile"] : 'https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg'; ?>"
                                     alt="User" />
                                 <svg width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                                     fill="#c0c0c0">
@@ -68,20 +70,26 @@
                                 <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "admin"): ?>
                                     <a href="<?php echo URLROOT; ?>/Pages/dashboard"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Dashboard</a>
-                                        <a href="<?php echo URLROOT; ?>/CategoryController/GetAllCategories"
+                                    <a href="<?php echo URLROOT; ?>/CategoryController/GetAllCategories"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Categories</a>
-                                        <a href="<?php echo URLROOT; ?>/AdminController/getCategoriesAndTags"
+                                    <a href="<?php echo URLROOT; ?>/AdminController/getCategoriesAndTags"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Tags</a>
 
-                                <a href="<?php echo URLROOT; ?>/Pages/index"
-                                    class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Accueil</a>
-                                    <a href="<?php echo URLROOT; ?>/UserController/LogOut" class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Log out</a>
+                                    <a href="<?php echo URLROOT; ?>/WikiController/index"
+                                        class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Accueil</a>
+                                    <a href="<?php echo URLROOT; ?>/UserController/LogOut"
+                                        class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Log out</a>
 
 
                                 <?php elseif (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "auteur"): ?>
-                                    <a href="<?php echo URLROOT; ?>/CategoryController/New_wiki" class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Add new
+                                    
+                                    <a href="<?php echo URLROOT; ?>/WikiController/index"
+                                        class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Accueil</a>
+                                    <a href="<?php echo URLROOT; ?>/WikiController/index/addForm"
+                                        class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Add new
                                         wiki</a>
-                                    <a href="<?php echo URLROOT; ?>/UserController/LogOut" class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Log out</a>
+                                    <a href="<?php echo URLROOT; ?>/UserController/LogOut"
+                                        class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Log out</a>
 
                                 <?php else: ?>
                                     <a href="<?php echo URLROOT; ?>/Pages/AuthLogin"
@@ -96,4 +104,3 @@
             </div>
         </div>
     </nav>
-

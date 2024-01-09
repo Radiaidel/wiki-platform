@@ -13,8 +13,8 @@
                 <div class="flex pb-6 items-center justify-between">
                     <div class="flex items-center">
                         <a href="#" class="inline-block mr-4">
-                            <img src="<?php echo URLROOT . '/public/' . $wiki->profile_picture ; ?>"
-                                alt="User" class="rounded-full w-14 h-14">
+                            <img src="<?php echo URLROOT . '/public/' . $wiki->profile_picture; ?>" alt="User"
+                                class="rounded-full w-14 h-14">
                         </a>
                         <div class="flex flex-col">
                             <div class="flex items-center">
@@ -91,9 +91,10 @@
                             </option>
                         <?php endforeach; ?>
                     </select>
-                    <label for="tagName" class="block text-sm font-medium text-gray-600 mb-1">Tag Name:</label>
-                    <input type="text" id="tagName" name="tagName" placeholder="Tag Name"
-                        class="p-2 border border-2 border-gray-600 rounded-md " required />
+                    <label for="selectedTags" class="block text-sm font-medium text-gray-600 mb-1">Tag Name:</label>
+                    <input type="hidden" id="selectedTagsInput" name="selectedTags" value="">
+                    <div id="tagsContainer" class=" space-x-3 space-y-2">
+                    </div>
                 </div>
 
                 <button type="submit" class="w-full text-white bg-gray-500 rounded-full text-sm px-5 py-2.5">Add
@@ -104,3 +105,53 @@
 
 
 </div>
+
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+    var selectedTags = [];
+
+    function updateTags() {
+        var categoryId = document.getElementById("categoryId").value;  
+        var tagsContainer = document.getElementById("tagsContainer");  
+
+        tagsContainer.innerHTML = "";
+
+        var tags = <?php echo json_encode($data['categoryTags']); ?>[categoryId];
+
+        if (tags) {
+            tags.forEach(function (tag) {
+                var tagButton = document.createElement("button");
+                tagButton.textContent = tag.tag_name;
+                tagButton.type = "button";
+                tagButton.classList.add("bg-blue-200", "text-blue-800", "text-sm", "font-medium", "me-2", "cursor-pointer", "px-3", "py-1", "rounded");
+                tagButton.dataset.tagId = tag.tagId;
+
+                tagButton.addEventListener("click", function () {
+                    this.classList.toggle("bg-blue-500");
+                    var index = selectedTags.indexOf(tag.tag_id);
+                    if (index === -1) {
+                        selectedTags.push(tag.tag_id);
+                    } else {
+                        selectedTags.splice(index, 1);
+                    }
+                    selectedTagsInput.value = JSON.stringify(selectedTags);
+                });
+
+                tagsContainer.appendChild(tagButton);
+            });
+        }
+    }
+
+    updateTags();
+
+    document.getElementById("categoryId").addEventListener("change", function () {
+        selectedTags = [];
+        updateTags();
+
+    });
+
+
+});
+</script>
+
+

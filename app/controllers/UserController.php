@@ -91,7 +91,7 @@ class UserController extends Controller
 
         session_destroy();
 
-        header('Location: ' . URLROOT . '/Pages/index');
+        header('Location: ' . URLROOT . '/WikiController/index');
         exit();
     }
 

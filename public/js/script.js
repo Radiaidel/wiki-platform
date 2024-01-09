@@ -184,4 +184,26 @@ function confirmDeleteTag(formid) {
 
 
 
+function confirmDeleteWiki(formid) {
+    var result = confirm("Are you sure you want to delete this Wiki?");
 
+    if (result) {
+        document.getElementById(formid).submit();
+    } else {
+        event.preventDefault();
+    }
+}
+
+
+
+function EditWikiForm(button) {
+    document.getElementById('closeModalBtnEditWiki').addEventListener('click', () => {
+        document.getElementById('EditWiki').classList.add('hidden');
+    });
+
+    var editCategoryForm = document.getElementById('EditWiki');
+    var overlay = document.getElementById('EditWiki');
+    overlay.classList.remove('hidden');
+
+
+}

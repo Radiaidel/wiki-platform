@@ -49,5 +49,24 @@ class AuthorController extends Controller
         header('Location: ' . URLROOT . '/WikiController/index');
         exit();
     }
+
+
+    public function DeleteWiki()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $wikiId = $_POST['wikiId'];
+         
+            $result = $this->wikiModel->deleteWiki($wikiId);
+
+            if ($result) {
+                $_SESSION['message'] = ['type' => 'success', 'text' => 'Wiki deleted successfully.'];
+            } else {
+                $_SESSION['message'] = ['type' => 'error', 'text' => 'Failed to delete wiki. Please try again.'];
+            }
+
+        }
+        header('Location: ' . URLROOT . '/WikiController/index');
+        exit();
+    }
 }
 ?>

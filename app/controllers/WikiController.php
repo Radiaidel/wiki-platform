@@ -17,6 +17,7 @@ class WikiController extends Controller
     public function index()
     {
         $wikis = $this->wikiModel->getAllWikis();
+
         $categories = $this->CategoryModel->getAllCategories();
 
         $categoryTags = [];

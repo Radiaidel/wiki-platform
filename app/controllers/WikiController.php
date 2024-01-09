@@ -22,7 +22,7 @@ class WikiController extends Controller
 
         $categoryTags = [];
         foreach ($categories as $category) {
-            $tags =  $this->tagModel->getTagsByCategory($category->category_id);
+            $tags = $this->tagModel->getTagsByCategory($category->category_id);
             $categoryTags[$category->category_id] = $tags;
         }
 
@@ -33,7 +33,7 @@ class WikiController extends Controller
         ];
         $this->view('Pages/index', $data);
 
-        if( isset($_GET['url'])  && $_GET['url'] === 'WikiController/index/addForm' ){
+        if (isset($_GET['url']) && $_GET['url'] === 'WikiController/index/addForm') {
 
             echo '<script >
             document.getElementById("AddWiki").classList.remove("hidden");
@@ -41,6 +41,21 @@ class WikiController extends Controller
                 document.getElementById("AddWiki").classList.add("hidden");
             });
           </script>';
+        }
+    }
+
+    public function singleWiki($wikiId)
+    {
+        $wikiDetails = $this->wikiModel->getWikiById($wikiId);
+    
+        if ($wikiDetails) {
+            $data = [
+                'wiki' => $wikiDetails,
+            ];
+    
+            $this->view('pages/single_wiki', $data);
+        } else {
+            echo "Wiki not found!";
         }
     }
 }

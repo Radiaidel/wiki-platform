@@ -22,7 +22,23 @@ class Wiki
 
         return $this->db->resultSet();
     }
+    public function getWikiById($wikiId)
+    {
+        $this->db->query('SELECT Wikis.*, Users.username, Users.profile_picture, Categories.category_name, GROUP_CONCAT(Tags.tag_name) AS tag_names
+        FROM Wikis
+        JOIN Users ON Wikis.author_id = Users.user_id
+        JOIN Categories ON Wikis.category_id = Categories.category_id
+        LEFT JOIN WikiTags ON Wikis.wiki_id = WikiTags.wiki_id
+        LEFT JOIN Tags ON WikiTags.tag_id = Tags.tag_id
+        WHERE Wikis.wiki_id = :wiki_id
+        GROUP BY Wikis.wiki_id
+        ORDER BY Wikis.updated_at DESC;');
 
+
+        $this->db->bind(':wiki_id', $wikiId);
+
+        return $this->db->single();
+    }
     public function addWiki($imageWiki, $title, $content, $categoryId)
     {
         $this->db->query('INSERT INTO Wikis (image_wiki, title, content, category_id, author_id) VALUES (:image, :title, :content, :categoryId, :author_id)');
@@ -53,10 +69,10 @@ class Wiki
     }
     public function deleteWikiTags($wikiId)
     {
-            $query = "DELETE FROM wikitags WHERE wiki_id = :wiki_id";
-            $this->db->query($query);
-            $this->db->bind(':wiki_id', $wikiId, PDO::PARAM_INT);
-            $this->db->execute();
+        $query = "DELETE FROM wikitags WHERE wiki_id = :wiki_id";
+        $this->db->query($query);
+        $this->db->bind(':wiki_id', $wikiId, PDO::PARAM_INT);
+        $this->db->execute();
     }
 
     public function deleteWiki($wikiId)
@@ -69,24 +85,24 @@ class Wiki
 
     public function updateWiki($wikiId, $title, $content, $categoryId, $imageWiki)
     {
-            $query = "UPDATE wikis SET title = :title, content = :content, category_id = :category_id WHERE wiki_id = :wiki_id";
-            $this->db->query($query);
-            $this->db->bind(':title', $title, PDO::PARAM_STR);
-            $this->db->bind(':content', $content, PDO::PARAM_STR);
-            $this->db->bind(':category_id', $categoryId, PDO::PARAM_INT);
+        $query = "UPDATE wikis SET title = :title, content = :content, category_id = :category_id WHERE wiki_id = :wiki_id";
+        $this->db->query($query);
+        $this->db->bind(':title', $title, PDO::PARAM_STR);
+        $this->db->bind(':content', $content, PDO::PARAM_STR);
+        $this->db->bind(':category_id', $categoryId, PDO::PARAM_INT);
+        $this->db->bind(':wiki_id', $wikiId, PDO::PARAM_INT);
+        $this->db->execute();
+
+        if ($imageWiki != NULL) {
+            $queryImage = "UPDATE wikis SET image_wiki = :image_wiki WHERE wiki_id = :wiki_id";
+            $this->db->query($queryImage);
+            $this->db->bind(':image_wiki', $imageWiki, PDO::PARAM_STR);
             $this->db->bind(':wiki_id', $wikiId, PDO::PARAM_INT);
+
             $this->db->execute();
+        }
 
-            if($imageWiki != NULL){
-                $queryImage = "UPDATE wikis SET image_wiki = :image_wiki WHERE wiki_id = :wiki_id";
-                $this->db->query($queryImage);
-                $this->db->bind(':image_wiki', $imageWiki, PDO::PARAM_STR);
-                $this->db->bind(':wiki_id', $wikiId, PDO::PARAM_INT);
+        return true;
 
-                $this->db->execute();
-            }
-
-            return true;
-     
     }
 }

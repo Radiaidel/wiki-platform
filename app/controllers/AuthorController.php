@@ -102,8 +102,8 @@ class AuthorController extends Controller
 
                 $selectedTags = isset($_POST['editSelectedTags']) ? json_decode($_POST['editSelectedTags'], true) : [];
              
-                $this->wikiModel->DeleteWikiTags($wikiId);
                 if($selectedTags != NULL ){
+                    $this->wikiModel->DeleteWikiTags($wikiId);
 
                     foreach ($selectedTags as $tagId) {
                         $this->wikiModel->addWikiTags($wikiId, $tagId);

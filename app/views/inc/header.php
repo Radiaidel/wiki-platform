@@ -68,7 +68,7 @@
                             <div id="dropdown-content"
                                 class="hidden group-hover:block absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-10">
                                 <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "admin"): ?>
-                                    <a href="<?php echo URLROOT; ?>/Pages/dashboard"
+                                    <a href="<?php echo URLROOT; ?>/WikiController/dashboard"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Dashboard</a>
                                     <a href="<?php echo URLROOT; ?>/CategoryController/GetAllCategories"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Categories</a>

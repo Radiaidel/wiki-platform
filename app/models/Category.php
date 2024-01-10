@@ -42,5 +42,15 @@ class Category
             return false; 
         }
     }
+    public function CategoriesByCountWiki() {
+        $this->db->query('
+            SELECT Categories.category_name, COUNT(Wikis.category_id) AS count
+            FROM Categories
+            LEFT JOIN Wikis ON Categories.category_id = Wikis.category_id
+            GROUP BY Categories.category_name
+        ');
+
+        return $this->db->resultSet();
+    }
 }
 ?>

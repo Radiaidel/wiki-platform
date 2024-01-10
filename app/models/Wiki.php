@@ -132,4 +132,16 @@ class Wiki
         return $this->db->execute();
     }
 
+    public function WikisByDate() {
+        // Assuming you have a 'created_at' column in your 'Wikis' table
+        $this->db->query('
+            SELECT DATE(created_at) as date, COUNT(*) as count
+            FROM Wikis
+            GROUP BY DATE(created_at)
+            ORDER BY DATE(created_at) DESC
+        ');
+    
+        return $this->db->resultSet();
+    }
+
 }

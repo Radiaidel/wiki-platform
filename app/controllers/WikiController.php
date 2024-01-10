@@ -63,6 +63,38 @@ class WikiController extends Controller
         ];
         $this->view('Pages/MyWikis', $data);
     }
+
+    public function dashboard() {
+    
+        $chartData = ['labels' => [], 'values' => []];
+
+        $result = $this->CategoryModel->CategoriesByCountWiki();
+        foreach ($result as $row) {
+            $chartData['labels'][] = $row->category_name;
+            $chartData['values'][] = $row->count;
+        }
+    
+
+        $lineChartData = ['labels' => [], 'values' => []];
+
+        $result = $this->wikiModel->WikisByDate(); // Replace WikiModel with your actual model name
+        foreach ($result as $row) {
+            $lineChartData['labels'][] = $row->date;
+            $lineChartData['values'][] = $row->count;
+        }
+
+
+        $data = [
+            'lineChartData' => $lineChartData,
+            'chartData' => $chartData,
+        ];
+    
+        // Load the view (replace 'dashboard' with your actual view name)
+        $this->view('pages/dashboard', $data);
+    }
+    // In WikiController.php
+
+
     public function singleWiki($wikiId)
     {
         $wikiDetails = $this->wikiModel->getWikiById($wikiId);

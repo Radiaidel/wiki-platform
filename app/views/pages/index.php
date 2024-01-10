@@ -3,7 +3,7 @@
 <?php require APPROOT . '/views/inc/messages.php'; ?>
 
 <div class="p-2 md:p-12">
-
+<div id="searchResults"></div>
     <!-- Display category buttons -->
     <div class="flex space-x-4 overflow-x-auto p-2 md:p-10">
         <?php foreach ($data['categories'] as $category): ?>
@@ -210,6 +210,31 @@
             selectedTags = [];
             updateTags();
 
+        });
+             
+
+
+        const searchInput = document.getElementById('searchInput');
+        const searchResultsContainer = document.getElementById('searchResults');
+
+        searchInput.addEventListener('input', function () {
+            const searchTerm = searchInput.value;
+
+            if (searchTerm.length >= 3) { 
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '<?php echo URLROOT; ?>/WikiController/search', true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        searchResultsContainer.innerHTML = xhr.responseText;
+                    }
+                };
+                
+                xhr.send('searchTerm=' + searchTerm);
+            } else {
+                searchResultsContainer.innerHTML = '';
+            }
         });
     });
     function ToDetailWiki(element) {

@@ -25,8 +25,9 @@
                     </div>
                     <div class="relative sm:flex items-center ml-10">
                         <!-- Removed sm:hidden to keep the search bar always visible -->
-                        <input type="text" placeholder="Rechercher ..."
+                        <input type="text" id="searchInput" placeholder="Rechercher..."
                             class="h-10 w-48 sm:w-96 px-4 text-sm text-white placeholder-white bg-gray-700 rounded-full focus:outline-none focus:shadow-none">
+                        
                         <svg class="absolute right-3 top-3 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -81,13 +82,13 @@
 
 
                                 <?php elseif (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "auteur"): ?>
-                                    
+
                                     <a href="<?php echo URLROOT; ?>/WikiController/index"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Accueil</a>
                                     <a href="<?php echo URLROOT; ?>/WikiController/index/addForm"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Add new
                                         wiki</a>
-                                        <a href="<?php echo URLROOT; ?>/WikiController/Mywikis"
+                                    <a href="<?php echo URLROOT; ?>/WikiController/Mywikis"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">My
                                         wikis</a>
                                     <a href="<?php echo URLROOT; ?>/UserController/LogOut"

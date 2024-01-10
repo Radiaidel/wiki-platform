@@ -144,4 +144,35 @@ class Wiki
         return $this->db->resultSet();
     }
 
+    public function searchWiki($searchTerm) {
+        $this->db->query('
+            SELECT * FROM Wikis
+            WHERE title LIKE :searchTerm
+        ');
+        $this->db->bind(':searchTerm', "%$searchTerm%");
+        
+        return $this->db->resultSet();
+    }
+    
+    public function searchTag($searchTerm) {
+        $this->db->query('
+            SELECT * FROM Tags
+            WHERE tag_name LIKE :searchTerm
+        ');
+        $this->db->bind(':searchTerm', "%$searchTerm%");
+        
+        return $this->db->resultSet();
+    }
+    
+    public function searchCategory($searchTerm) {
+        $this->db->query('
+            SELECT * FROM Categories
+            WHERE category_name LIKE :searchTerm
+        ');
+        $this->db->bind(':searchTerm', "%$searchTerm%");
+        
+        return $this->db->resultSet();
+    }
+    
+
 }

@@ -26,7 +26,7 @@ class User
     {
         $this->db->query('SELECT * FROM Users WHERE email = :email');
         $this->db->bind(':email', $email);
-        $this->db->single(); // Assuming a method to fetch a single result
+        $this->db->single();
 
         return $this->db->rowCount() > 0;
     }

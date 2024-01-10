@@ -32,17 +32,17 @@ class UserController extends Controller
                     return;
                 }
             }
-            $userModel = $this->model('User');
 
-            if ($userModel->findByEmail($email)) {
+            if ($this->userModel->findByEmail($email)) {
                 $_SESSION['message'] = ['type' => 'error', 'text' => 'Email is already registered.'];
-                return;
+                $this->view('Auth/register');
+                exit();
             }
 
-            $newuser = $userModel->registerUser($name, $email, $hashedPassword, $profilePicture);
+            $newuser = $this->userModel->registerUser($name, $email, $hashedPassword, $profilePicture);
             if ($newuser) {
                 $_SESSION['message'] = ['type' => 'success', 'text' => 'Registration successful.'];
-                header('Location: ' . URLROOT . '/Auth/login');
+                $this->view('Auth/login');
                 exit();
             } else {
                 $_SESSION['message'] = ['type' => 'error', 'text' => 'Registration failed. Please try again.'];
@@ -51,8 +51,6 @@ class UserController extends Controller
             $this->view('Auth/register');
         }
     }
-
-
     public function login()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -70,7 +68,7 @@ class UserController extends Controller
                 $_SESSION['message'] = ['type' => 'success', 'text' => 'Login successful.'];
                 if ($_SESSION['user_role'] == "admin") {
                     header('Location: ' . URLROOT . '/Pages/dashboard');
-
+exit();
                 } elseif ($_SESSION['user_role'] == "auteur") {
 
                     header('Location: ' . URLROOT . '/WikiController/index');

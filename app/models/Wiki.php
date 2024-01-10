@@ -124,7 +124,6 @@ class Wiki
 
     }
 
-    // In your model (e.g., WikiModel)
     public function archiveWikiById($wikiId)
     {
         $this->db->query('UPDATE wikis SET archived = 1 WHERE wiki_id = :wiki_id');

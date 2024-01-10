@@ -15,7 +15,7 @@
                     <div class="w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0"></div>
                 </div>
                 <div class="mt-5">
-                    <form class="form" method="POST" action="<?php echo URLROOT; ?>/UserController/Login"
+                    <form class="form" method="POST" action="<?php echo URLROOT; ?>/UserController/login"
                         onsubmit="return validateFormLogin()">
                         <div class="mb-3 space-y-2 w-full text-xs">
                             <label class="font-semibold text-gray-600 py-2">Your email</label>

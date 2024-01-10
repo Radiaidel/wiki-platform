@@ -72,9 +72,8 @@
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Dashboard</a>
                                     <a href="<?php echo URLROOT; ?>/CategoryController/GetAllCategories"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Categories</a>
-                                    <a href="<?php echo URLROOT; ?>/AdminController/getCategoriesAndTags"
+                                    <a href="<?php echo URLROOT; ?>/CategoryController/getCategorie_sTags"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Tags</a>
-
                                     <a href="<?php echo URLROOT; ?>/WikiController/index"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Accueil</a>
                                     <a href="<?php echo URLROOT; ?>/UserController/LogOut"

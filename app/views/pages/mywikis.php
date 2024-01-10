@@ -6,7 +6,7 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
         <?php foreach ($data['wikis'] as $wiki): ?>
-            <div class="cursor-pointer mb-4 p-6 rounded-xl bg-white flex flex-col">                                <!-- Author Info -->
+            <div class="cursor-pointer mb-4 p-6 rounded-xl bg-white flex flex-col">                            
                     <div class="flex pb-4 items-center justify-between">
                         <div class="flex items-center space-x-4">
                             <a href="#" class="inline-block">
@@ -62,7 +62,7 @@
                                     </svg>
                                 </button>
 
-                                <form action="<?php echo URLROOT; ?>/AuthorController/DeleteWiki" method="post" id="DeleteWiki">
+                                <form action="<?php echo URLROOT; ?>/WikiController/DeleteWiki" method="post" id="DeleteWiki">
                                     <input type="hidden" value="<?= $wiki->wiki_id; ?>" name="wikiId">
                                     <button type="submit" onclick="confirmDeleteWiki('DeleteWiki')">
                                         <svg width="22px" height="22px" viewBox="0 0 24 24" fill="none" class="align-middle"
@@ -125,7 +125,7 @@
                 </button>
             </div>
             <form id="editWikiForm" method="POST" enctype="multipart/form-data" class="items-center space-y-4 "
-                action="<?php echo URLROOT; ?>/AuthorController/EditWiki">
+                action="<?php echo URLROOT; ?>/WikiController/EditWiki">
                 <div class="flex flex-col space-y-4 mt-4">
                     <input type="hidden" id="wikiId" name="wikiId" value="">
 

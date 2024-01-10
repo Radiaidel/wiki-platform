@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <img src="<?= URLROOT . '/public/' . $data['wiki']->image_wiki; ?>" alt="Wiki Image" class="mb-4 rounded-lg">
+        <img src="<?= URLROOT . '/public/' . $data['wiki']->image_wiki; ?>" alt="" class="mb-4 rounded-lg">
 
 
         <!-- Tags -->
@@ -52,26 +52,6 @@
             </p>
         </div>
 
-        <!-- Edit and Delete Buttons (if user is the author) -->
-        <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $data['wiki']->author_id): ?>
-            <div class="flex space-x-2 mb-4">
-                <button type="button" class="editWiki" onclick="GetButton('.editWiki','ShowEditWikiForm')"
-                    data-wiki-id="<?= $data['wiki']->wiki_id; ?>" data-wiki-title="<?= $data['wiki']->title; ?>"
-                    data-wiki-content="<?= $data['wiki']->content; ?>"
-                    data-wiki-image="<?= URLROOT . '/public/' . $data['wiki']->image_wiki; ?>"
-                    data-wiki-category-id="<?= $data['wiki']->category_id; ?>"
-                    data-wiki-tags="<?= $data['wiki']->tag_names; ?>">
-                    Edit Wiki
-                </button>
-
-                <form action="<?= URLROOT; ?>/AuthorController/DeleteWiki" method="post" id="DeleteWiki">
-                    <input type="hidden" value="<?= $data['wiki']->wiki_id; ?>" name="wikiId">
-                    <button type="submit" onclick="confirmDeleteWiki('DeleteWiki')">
-                        Delete Wiki
-                    </button>
-                </form>
-            </div>
-        <?php endif; ?>
 
     </div>
 </div>

@@ -60,7 +60,7 @@
                         </svg>
                     </button>
 
-                    <form action="<?php echo URLROOT; ?>/AdminController/DeleteCategory" method="post" id="DeleteCategory">
+                    <form action="<?php echo URLROOT; ?>/CategoryController/DeleteCategory" method="post" id="DeleteCategory">
                         <input type="hidden" value="<?php echo $category->category_id; ?>" name="categoryId">
                         <button type="submit" onclick="confirmDelete('DeleteCategory')">
                             <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
@@ -92,7 +92,7 @@
                 </button>
             </div>
             <form id="addCategoryForm" method="POST" enctype="multipart/form-data" class=" items-center space-y-4"
-                action="<?php echo URLROOT; ?>/AdminController/AddNewCategory">
+                action="<?php echo URLROOT; ?>/CategoryController/AddNewCategory">
                 <div class="flex flex-row space-x-4 mt-4">
 
                     <label for="categorypicture"
@@ -139,7 +139,7 @@
                 </button>
             </div>
             <form id="EditCategoryForm" method="POST" enctype="multipart/form-data" class="items-center space-y-4"
-                action="<?php echo URLROOT; ?>/AdminController/UpdateCategory">
+                action="<?php echo URLROOT; ?>/CategoryController/UpdateCategory">
                 <div class="flex flex-row space-x-4 mt-4">
 
                     <label for="Inputcategorypicture"

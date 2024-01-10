@@ -21,7 +21,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
         <?php foreach ($data['wikis'] as $wiki): ?>
             <div class="cursor-pointer mb-4 p-6 rounded-xl bg-white flex flex-col"
-                data-wiki-id="<?php echo $wiki->wiki_id; ?>" onclick="ToDetailWiki(this)"> <!-- Author Info -->
+                data-wiki-id="<?php echo $wiki->wiki_id; ?>" onclick="ToDetailWiki(this)">
                 <div class="flex pb-4 items-center justify-between">
                     <div class="flex items-center space-x-4">
                         <a href="#" class="inline-block">
@@ -41,7 +41,7 @@
                     </div>
                     <?php if (isset($_SESSION['user_id']) && $_SESSION['user_role'] == "admin"): ?>
 
-                        <form action="<?php echo URLROOT; ?>/AdminController/ArchiveWiki" method="post" id="DeleteWiki">
+                        <form action="<?php echo URLROOT; ?>/WikiController/ArchiveWiki" method="post" id="DeleteWiki">
                             <input type="hidden" value="<?= $wiki->wiki_id; ?>" name="wikiId">
                             <button type="submit">
                                 <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
@@ -116,7 +116,7 @@
                 </button>
             </div>
             <form id="addWikiForm" method="POST" enctype="multipart/form-data" class="items-center space-y-4 "
-                action="<?php echo URLROOT; ?>/AuthorController/AddNewWiki">
+                action="<?php echo URLROOT; ?>/WikiController/AddNewWiki">
                 <div class="flex flex-col space-y-4 mt-4">
                     <div class="mb-4">
                         <label for="image" class="block text-sm font-medium text-gray-600 mb-1">Image:</label>

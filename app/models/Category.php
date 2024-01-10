@@ -9,6 +9,10 @@ class Category
         $this->db = new Database;
     }
 
+    public function getAllCategories() {
+        $this->db->query('SELECT * FROM Categories');
+        return $this->db->resultSet();
+    }
     public function addCategory($categoryName, $categoryPicture)
     {
         $this->db->query('INSERT INTO Categories (category_name, category_picture) VALUES (:categoryName, :categoryPicture)');
@@ -18,10 +22,6 @@ class Category
         return $this->db->execute();
     }
 
-    public function getAllCategories() {
-        $this->db->query('SELECT * FROM Categories');
-        return $this->db->resultSet();
-    }
     public function updateCategory($categoryId, $categoryName,$categoryPicture) {
         $this->db->query('UPDATE categories SET category_name = :categoryName , category_picture =:categoryPicture WHERE category_id = :categoryId');
         $this->db->bind(':categoryId', $categoryId);

@@ -52,7 +52,7 @@
                 </button>
             </div>
             <form id="addTagForm" method="POST" enctype="multipart/form-data" class="items-center space-y-4"
-                action="<?php echo URLROOT; ?>/AdminController/AddNewTag">
+                action="<?php echo URLROOT; ?>/TagController/AddNewTag">
                 <div class="flex flex-col space-y-4 mt-4">
 
                     <label for="categoryId" class="text-gray-600">Select Category:</label>
@@ -88,7 +88,7 @@
                 </button>
             </div>
             <form id="TagForm" method="POST" enctype="multipart/form-data" class="items-center space-y-4"
-                action="<?php echo URLROOT; ?>/AdminController/UD_Tag">
+                action="<?php echo URLROOT; ?>/TagController/UD_Tag">
                 <div class="flex flex-col space-y-4 mt-4">
 
                     <label for="categoryId" class="text-gray-600">Select Category:</label>

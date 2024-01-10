@@ -16,7 +16,7 @@
 
             <div class="flex flex-col">
                 <div class="mt-3">
-                    <form class="form" method="POST" action="<?php echo URLROOT; ?>/UserController/Register"
+                    <form class="form" method="POST" action="<?php echo URLROOT; ?>/UserController/register"
                         enctype="multipart/form-data" onsubmit="return validateFormRegister()">
                         <div class="mb-3 space-y-2 w-full text-xs">
                             <div class="flex items-center justify-center">

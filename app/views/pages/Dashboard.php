@@ -2,7 +2,7 @@
 
 <?php require APPROOT . '/views/inc/messages.php'; ?>
 
-<div class="grid grid-cols-12 col-span-12 w-full mb-4 pb-10 px-8 bg-gray-100 gap-6 ">
+<div class="grid grid-cols-12 col-span-12 mb-4 pb-10 px-8 bg-gray-100 gap-6 ">
     <div class="col-span-12 mt-8">
         <div class="grid grid-cols-12 gap-6 mt-5">
             <a class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white p-5" href="#">
@@ -15,66 +15,74 @@
                 </div>
                 <div class="ml-2 w-full flex-1">
                     <div>
-                        <div class="mt-3 text-3xl font-bold ">4.510</div>
-
-                        <div class="mt-1 text-base text-gray-600">Item Sales</div>
+                        <div class="mt-3 text-3xl font-bold ">
+                            <?php echo $data['categoryCount']; ?>
+                        </div>
+                        <div class="mt-1 text-base text-gray-600">Total Categories</div>
                     </div>
                 </div>
             </a>
-            <a class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white p-5" href="#">
-                <div class="flex justify-end">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-400" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                    </svg>
-                </div>
-                <div class="ml-2 w-full flex-1">
-                    <div>
-                        <div class="mt-3 text-3xl font-bold ">4.510</div>
-
-                        <div class="mt-1 text-base text-gray-600">Item Sales</div>
+        <a class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white p-5" href="#">
+            <div class="flex justify-end">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-400" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+            </div>
+            <div class="ml-2 w-full flex-1">
+                <div>
+                    <div class="mt-3 text-3xl font-bold ">
+                        <?php echo $data['wikiCount']; ?>
                     </div>
+                    <div class="mt-1 text-base text-gray-600">Total wikis</div>
                 </div>
-            </a>
-            <a class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white p-5" href="#">
-                <div class="flex justify-end">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-400" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                    </svg>
-                </div>
-                <div class="ml-2 w-full flex-1">
-                    <div>
-                        <div class="mt-3 text-3xl font-bold ">4.510</div>
-
-                        <div class="mt-1 text-base text-gray-600">Item Sales</div>
+            </div>
+        </a>
+        <a class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white p-5" href="#">
+            <div class="flex justify-end">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-400" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+            </div>
+            <div class="ml-2 w-full flex-1">
+                <div>
+                    <div class="mt-3 text-3xl font-bold ">
+                        <?php echo $data['tagCount']; ?>
                     </div>
+                    <div class="mt-1 text-base text-gray-600">Total tags</div>
                 </div>
-            </a>
-            <a class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white p-5" href="#">
-                <div class="flex justify-end">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-400" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                    </svg>
-                </div>
-                <div class="ml-2 w-full flex-1">
-                    <div>
-                        <div class="mt-3 text-3xl font-bold ">4.510</div>
-
-                        <div class="mt-1 text-base text-gray-600">Item Sales</div>
+            </div>
+        </a>
+        <a class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white p-5" href="#">
+            <div class="flex justify-end">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-400" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+            </div>
+            <div class="ml-2 w-full flex-1">
+                <div>
+                    <div class="mt-3 text-3xl font-bold ">
+                        <?php echo $data['userCount']; ?>
                     </div>
+                    <div class="mt-1 text-base text-gray-600">Total users</div>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
     </div>
-    <div class="col-span-12 mt-5 grid grid-cols-1 lg:grid-cols-2 gap-4 lg:w-1/2"> <!-- Add gap-4 here for spacing -->
-        <canvas class="bg-white shadow-lg p-4 lg:w-1/2" id="chartline"></canvas>
-        <canvas id="ChartDoughnut" class="lg:w-1/2 bg-white shadow-lg p-4"></canvas>
+</div>
+<div class="col-span-12 mt-5">
+    <div class="grid gap-6 grid-cols-1 md:grid-cols-2">
+        <canvas class="bg-white shadow-lg p-4 md:w-1/2 chart-container" id="ChartDoughnut"></canvas>
+        <canvas class="bg-white shadow-lg p-4 md:w-1/2 chart-container" id="chartline"></canvas>
     </div>
+</div>
+
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -100,7 +108,7 @@
         } else {
             console.error("Canvas or its context is not available.");
         }
-       
+
 
 
 

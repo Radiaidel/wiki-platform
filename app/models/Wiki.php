@@ -69,38 +69,6 @@ class Wiki
 
         return $this->db->lastInsertId();
     }
-
-    public function addWikiTags($wikiId, $tagId)
-    {
-        try {
-            $query = "INSERT INTO WikiTags (wiki_id, tag_id) VALUES (:wikiId, :tagId)";
-            $this->db->query($query);
-            $this->db->bind(':wikiId', $wikiId);
-            $this->db->bind(':tagId', $tagId);
-
-            $this->db->execute();
-            return true;
-        } catch (PDOException $e) {
-
-            return false;
-        }
-    }
-    public function deleteWikiTags($wikiId)
-    {
-        $query = "DELETE FROM wikitags WHERE wiki_id = :wiki_id";
-        $this->db->query($query);
-        $this->db->bind(':wiki_id', $wikiId, PDO::PARAM_INT);
-        $this->db->execute();
-    }
-
-    public function deleteWiki($wikiId)
-    {
-        $this->db->query('DELETE FROM Wikis WHERE wiki_id = :wikiId');
-        $this->db->bind(':wikiId', $wikiId);
-        return $this->db->execute();
-    }
-
-
     public function updateWiki($wikiId, $title, $content, $categoryId, $imageWiki)
     {
         $query = "UPDATE wikis SET title = :title, content = :content, category_id = :category_id WHERE wiki_id = :wiki_id";
@@ -130,6 +98,34 @@ class Wiki
         $this->db->bind(':wiki_id', $wikiId);
 
         return $this->db->execute();
+    }
+    public function deleteWiki($wikiId)
+    {
+        $this->db->query('DELETE FROM Wikis WHERE wiki_id = :wikiId');
+        $this->db->bind(':wikiId', $wikiId);
+        return $this->db->execute();
+    }
+    public function addWikiTags($wikiId, $tagId)
+    {
+        try {
+            $query = "INSERT INTO WikiTags (wiki_id, tag_id) VALUES (:wikiId, :tagId)";
+            $this->db->query($query);
+            $this->db->bind(':wikiId', $wikiId);
+            $this->db->bind(':tagId', $tagId);
+
+            $this->db->execute();
+            return true;
+        } catch (PDOException $e) {
+
+            return false;
+        }
+    }
+    public function deleteWikiTags($wikiId)
+    {
+        $query = "DELETE FROM wikitags WHERE wiki_id = :wiki_id";
+        $this->db->query($query);
+        $this->db->bind(':wiki_id', $wikiId, PDO::PARAM_INT);
+        $this->db->execute();
     }
 
     public function WikisByDate() {
@@ -174,5 +170,8 @@ class Wiki
         return $this->db->resultSet();
     }
     
-
+    public function getWikiCount() {
+        $this->db->query('SELECT COUNT(*) as count FROM wikis');
+        return $this->db->single()->count;
+    }
 }

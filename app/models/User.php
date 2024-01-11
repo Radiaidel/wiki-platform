@@ -38,5 +38,7 @@ class User
 
         return $row;
     }
-    // Other methods...
-}
+    public function getUserCount() {
+        $this->db->query('SELECT COUNT(*) as count FROM users');
+        return $this->db->single()->count;
+    }}

@@ -67,8 +67,8 @@ class UserController extends Controller
 
                 $_SESSION['message'] = ['type' => 'success', 'text' => 'Login successful.'];
                 if ($_SESSION['user_role'] == "admin") {
-                    header('Location: ' . URLROOT . '/Pages/dashboard');
-exit();
+                    header('Location: ' . URLROOT . '/WikiController/dashboard');
+                    exit();
                 } elseif ($_SESSION['user_role'] == "auteur") {
 
                     header('Location: ' . URLROOT . '/WikiController/index');
@@ -82,7 +82,8 @@ exit();
             $this->view('Auth/login');
         }
     }
-    public function LogOut(){
+    public function LogOut()
+    {
         session_start();
 
         $_SESSION = array();

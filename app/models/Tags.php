@@ -42,5 +42,10 @@ class Tags
         return  $this->db->execute();
 
     }
+    public function getTagCount() {
+        $this->db->query('SELECT COUNT(*) as count FROM tags');
+        return $this->db->single()->count;
+    }
+ 
 }
 ?>

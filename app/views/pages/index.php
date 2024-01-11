@@ -41,7 +41,7 @@
                     </div>
                     <?php if (isset($_SESSION['user_id']) && $_SESSION['user_role'] == "admin"): ?>
 
-                        <form action="<?php echo URLROOT; ?>/WikiController/ArchiveWiki" method="post" id="DeleteWiki">
+                        <form action="<?php echo URLROOT; ?>/WikiController/ArchiveWiki" method="POST" >
                             <input type="hidden" value="<?= $wiki->wiki_id; ?>" name="wikiId">
                             <button type="submit">
                                 <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"

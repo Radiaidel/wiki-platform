@@ -52,5 +52,9 @@ class Category
 
         return $this->db->resultSet();
     }
+    public function getCategoryCount() {
+        $this->db->query('SELECT COUNT(*) as count FROM categories');
+        return $this->db->single()->count;
+    }
 }
 ?>

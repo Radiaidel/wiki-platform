@@ -29,7 +29,29 @@ class Pages extends Controller
 
     $this->view('pages/DisplayCategories', ['categories' => $categories]);
   }
+  public function getCategorie_sTags()
+  {
+    $CategoryModel = $this->model('Category');
 
+    $categories = $CategoryModel->getAllCategories();
+
+    $data = [];
+
+    foreach ($categories as $category) {
+      $categoryName = $category->category_name;
+
+      $tagModel = $this->model('Tags');
+
+      $tags = $tagModel->getTagsByCategory($category->category_id);
+
+      $data['categories'][$categoryName] = [
+        'category_id' => $category->category_id,
+        'tags' => $tags,
+      ];
+    }
+    $this->view('pages/tags', ['Tagcategories' => $data]);
+
+  }
   public function dashboard()
   {
     $this->view('pages/Dashboard');
@@ -43,27 +65,4 @@ class Pages extends Controller
     $this->view('pages/tags');
   }
 
-
-
-  // public function getCategorie_sTags()
-// {
-//     $categories = $this->CategoryModel->getAllCategories();
-
-  //     $data = [];
-
-  //     foreach ($categories as $category) {
-//         $categoryName = $category->category_name;
-
-  //         $tagModel = $this->model('Tags');
-
-  //         $tags = $tagModel->getTagsByCategory($category->category_id);
-
-  //         $data['categories'][$categoryName] = [
-//             'category_id' => $category->category_id,
-//             'tags' => $tags,
-//         ];
-//     }
-//     $this->view('pages/tags', ['Tagcategories' => $data]);
-
-  // }
 }

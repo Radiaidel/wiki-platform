@@ -2,8 +2,6 @@
 class TagController extends Controller
 {
     private $tagModel;
-
-
     public function __construct()
     {
         $this->tagModel = $this->model('Tags');
@@ -29,16 +27,15 @@ class TagController extends Controller
                 $_SESSION['message'] = ['type' => 'error', 'text' => 'Operation failed. Please try again.'];
             }
         }
-        header('Location: ' . URLROOT . '/CategoryController/getCategorie_sTags');
+        header('Location: ' . URLROOT . '/Pages/getCategorie_sTags');
         exit();
     }
-
     public function UD_Tag() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $id_category = $_POST['categoryId'];
             $id_tag = $_POST['tagId'];
-            $name_tag = $_POST['tagName'];
+            $name_tag =  htmlspecialchars(trim($_POST['tagName']));
 
             if (isset($_POST['updatetagbtn'])) {
                 $success= $this->tagModel->updateTag($id_tag,$id_category,$name_tag);
@@ -60,7 +57,7 @@ class TagController extends Controller
                 }
             }
         }
-        header('Location: ' . URLROOT . '/CategoryController/getCategorie_sTags');
+        header('Location: ' . URLROOT . '/Pages/getCategorie_sTags');
         exit();
     }
 }

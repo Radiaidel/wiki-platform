@@ -173,7 +173,26 @@
 
         </div>
     </div>
+<script>
+    
+document.getElementById('addCategoryForm').addEventListener('submit', function (event) {
+    const categoryName = document.getElementById('categoryName').value;
 
+    if (!validateCategoryName(categoryName)) {
+        alert('Veuillez entrer un nom de catégorie valide.');
+        event.preventDefault(); 
+    }
+});
+
+document.getElementById('EditCategoryForm').addEventListener('submit', function (event) {
+    const categoryName = document.getElementById('categoryNameedit').value;
+
+    if (!validateCategoryName(categoryName)) {
+        alert('Veuillez entrer un nom de catégorie valide.');
+        event.preventDefault(); 
+    }
+});
+</script>
 
 
 </div>

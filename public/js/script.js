@@ -163,25 +163,12 @@ function ShowTagDetailsForm(tagElement) {
     var categoryId = tagElement.getAttribute('data-category-id');
 
     document.getElementById('TagForm').querySelector('#categoryId').value = categoryId;
-    document.getElementById('TagForm').querySelector('#tagName').value = tagName;
+    document.getElementById('TagForm').querySelector('#tagNameedit').value = tagName;
     document.getElementById('TagForm').querySelector('#tagId').value = tagId;
 
     document.getElementById('TagDetails').classList.remove('hidden');
 
 }
-
-function confirmDeleteTag(formid) {
-    var result = confirm("Are you sure you want to delete this tag?");
-
-    if (result) {
-        document.getElementById(formid).submit();
-    }
-    else {
-        event.preventDefault();
-    }
-}
-
-
 
 function confirmDeleteWiki(formid) {
     var result = confirm("Are you sure you want to delete this Wiki?");
@@ -265,25 +252,19 @@ function displayTagsForEdit(inputId, containerId, tags) {
 function validateCategoryName(categoryName) {
     return categoryName.trim() !== '';
 }
+function validateTagName(tagName) {
+    return tagName.trim() !== '';
+}
+function confirmDeleteTag(formid) {
+    var result = confirm("Are you sure you want to delete this tag?");
 
-document.getElementById('addCategoryForm').addEventListener('submit', function (event) {
-    const categoryName = document.getElementById('categoryName').value;
-
-    if (!validateCategoryName(categoryName)) {
-        alert('Veuillez entrer un nom de catégorie valide.');
-        event.preventDefault(); 
+    if (result) {
+        document.getElementById(formid).submit();
     }
-});
-
-document.getElementById('EditCategoryForm').addEventListener('submit', function (event) {
-    const categoryName = document.getElementById('categoryNameedit').value;
-
-    if (!validateCategoryName(categoryName)) {
-        alert('Veuillez entrer un nom de catégorie valide.');
-        event.preventDefault(); 
+    else {
+        event.preventDefault();
     }
-});
-
+}
 
 
 

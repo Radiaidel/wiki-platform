@@ -2,22 +2,16 @@
 
 <?php require APPROOT . '/views/inc/messages.php'; ?>
 
+
 <div class="p-2 md:p-12">
-<div id="searchResults"></div>
-    <!-- Display category buttons -->
-    <div class="flex space-x-4 overflow-x-auto p-2 md:p-10">
-        <?php foreach ($data['categories'] as $category): ?>
-            <div class="px-4 py-1 rounded-md bg-blue-500 text-white  flex items-center space-x-2">
-                <img class="w-7 h-7 rounded-full" src="<?php echo URLROOT . '/public/' . $category->category_picture; ?>"
-                    alt="User" />
-                <span class="lg:text-md flex-shrink">
-                    <?php echo htmlspecialchars($category->category_name); ?>
-                </span>
-            </div>
-        <?php endforeach; ?>
-    </div>
+    <div id="searchResults"></div>
 
 
+    <?php if (empty($data['wikis'])): ?>
+        <div class="flex items-center justify-center">
+            <p class="text-xl font-semibold text-gray-600">No wikis found.</p>
+        </div>
+    <?php else: ?>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
         <?php foreach ($data['wikis'] as $wiki): ?>
             <div class="cursor-pointer mb-4 p-6 rounded-xl bg-white flex flex-col"
@@ -41,7 +35,7 @@
                     </div>
                     <?php if (isset($_SESSION['user_id']) && $_SESSION['user_role'] == "admin"): ?>
 
-                        <form action="<?php echo URLROOT; ?>/WikiController/ArchiveWiki" method="POST" >
+                        <form action="<?php echo URLROOT; ?>/WikiController/ArchiveWiki" method="POST">
                             <input type="hidden" value="<?= $wiki->wiki_id; ?>" name="wikiId">
                             <button type="submit">
                                 <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
@@ -99,6 +93,7 @@
         <?php endforeach; ?>
 
     </div>
+    <?php endif; ?>
 
 
 
@@ -211,7 +206,7 @@
             updateTags();
 
         });
-             
+
 
 
         const searchInput = document.getElementById('searchInput');
@@ -220,17 +215,17 @@
         searchInput.addEventListener('input', function () {
             const searchTerm = searchInput.value;
 
-            if (searchTerm.length >= 3) { 
+            if (searchTerm.length >= 3) {
                 const xhr = new XMLHttpRequest();
                 xhr.open('POST', '<?php echo URLROOT; ?>/WikiController/search', true);
                 xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                
+
                 xhr.onreadystatechange = function () {
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         searchResultsContainer.innerHTML = xhr.responseText;
                     }
                 };
-                
+
                 xhr.send('searchTerm=' + searchTerm);
             } else {
                 searchResultsContainer.innerHTML = '';

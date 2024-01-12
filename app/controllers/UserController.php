@@ -15,7 +15,7 @@ class UserController extends Controller
             $password = htmlspecialchars(trim($_POST['password']));
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            $profilePicture = "default.jpg";
+            $profilePicture = "upload/default.jpg";
             if (isset($_FILES['profilePicture']) && $_FILES['profilePicture']['error'] === UPLOAD_ERR_OK) {
                 $targetDirectory = "upload/";
                 $targetPath = $targetDirectory . basename($_FILES['profilePicture']['name']);
@@ -24,7 +24,6 @@ class UserController extends Controller
                     mkdir($targetDirectory, 0755, true);
                 }
 
-                // Move the uploaded file to the target directory
                 if (move_uploaded_file($_FILES['profilePicture']['tmp_name'], $targetPath)) {
                     $profilePicture = "upload/" . $_FILES['profilePicture']['name'];
                 } else {

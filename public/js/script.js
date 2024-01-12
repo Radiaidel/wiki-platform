@@ -132,7 +132,7 @@ function ShowEditForm(button) {
     overlay.classList.remove('hidden');
 
     if (editCategoryForm) {
-        editCategoryForm.querySelector('#categoryName').value = button.dataset.categoryName || '';
+        editCategoryForm.querySelector('#categoryNameedit').value = button.dataset.categoryName || '';
         editCategoryForm.querySelector('#categoryId').value = button.dataset.categoryId || '';
         var imageUrl = button.dataset.categoryPicture || '';
         displayImageforEdit('categorypictureedit', imageUrl);
@@ -141,7 +141,6 @@ function ShowEditForm(button) {
     
     function displayImageforEdit(labelid,url) {
         const label = document.getElementById(labelid);
-        // preview.src = imageUrl;
         
         label.style.backgroundImage = 'url(' + url + ')';
         label.style.backgroundSize = 'cover';
@@ -263,6 +262,27 @@ function displayTagsForEdit(inputId, containerId, tags) {
     });
 }
 
+function validateCategoryName(categoryName) {
+    return categoryName.trim() !== '';
+}
+
+document.getElementById('addCategoryForm').addEventListener('submit', function (event) {
+    const categoryName = document.getElementById('categoryName').value;
+
+    if (!validateCategoryName(categoryName)) {
+        alert('Veuillez entrer un nom de catégorie valide.');
+        event.preventDefault(); 
+    }
+});
+
+document.getElementById('EditCategoryForm').addEventListener('submit', function (event) {
+    const categoryName = document.getElementById('categoryNameedit').value;
+
+    if (!validateCategoryName(categoryName)) {
+        alert('Veuillez entrer un nom de catégorie valide.');
+        event.preventDefault(); 
+    }
+});
 
 
 

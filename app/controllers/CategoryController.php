@@ -19,7 +19,7 @@ class CategoryController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $categoryName = htmlspecialchars(trim($_POST['categoryName']));
-
+            $categoryPicture='upload/catdefault.png';
             if (isset($_FILES['categorypicture']) && $_FILES['categorypicture']['error'] === UPLOAD_ERR_OK) {
                 $targetDirectory = "upload/";
                 $targetPath = $targetDirectory . basename($_FILES['categorypicture']['name']);
@@ -61,6 +61,7 @@ class CategoryController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $categoryId = $_POST['categoryId'];
             $categoryName = htmlspecialchars(trim($_POST['categoryName']));
+            $categoryPicture='upload/catdefault.png';
 
             if (isset($_FILES['Inputcategorypicture']) && $_FILES['Inputcategorypicture']['error'] === UPLOAD_ERR_OK) {
                 $targetDirectory = "upload/";
@@ -119,28 +120,6 @@ class CategoryController extends Controller
         }
         header('Location: ' . URLROOT . '/CategoryController/GetAllCategories');
         exit();
-    }
-
-    public function getCategorie_sTags()
-    {
-        $categories = $this->CategoryModel->getAllCategories();
-
-        $data = [];
-
-        foreach ($categories as $category) {
-            $categoryName = $category->category_name;
-            
-            $tagModel = $this->model('Tags');
-
-            $tags = $tagModel->getTagsByCategory($category->category_id);
-
-            $data['categories'][$categoryName] = [
-                'category_id' => $category->category_id,
-                'tags' => $tags,
-            ];
-        }
-        $this->view('pages/tags', ['Tagcategories' => $data]);
-
     }
 }
 ?>

@@ -12,8 +12,8 @@
 
 </head>
 
-<body class="bg-gray-100  h-screen">
-    <nav class="bg-gray-900">
+<body class="bg-gray-100  h-screen" >
+    <nav class="bg-gray-900" >
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
@@ -26,7 +26,7 @@
                     <div class="relative sm:flex items-center ml-10">
                         <!-- Removed sm:hidden to keep the search bar always visible -->
                         <input type="text" id="searchInput" placeholder="Rechercher..."
-                            class="h-10 w-48 sm:w-96 px-4 text-sm text-white placeholder-white bg-gray-700 rounded-full focus:outline-none focus:shadow-none">
+                            class="h-10 w-48 sm:w-96 px-4 text-sm text-white placeholder-white bg-gray-700 rounded-full " >
                         
                         <svg class="absolute right-3 top-3 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -34,10 +34,6 @@
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </div>
-
-
-
-
                 </div>
                 <div class="flex items-center ml-4 md:ml-6">
                     <div class="relative ml-3">
@@ -69,13 +65,13 @@
                             <div id="dropdown-content"
                                 class="hidden group-hover:block absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg z-10">
                                 <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "admin"): ?>
-                                    <a href="<?php echo URLROOT; ?>/WikiController/dashboard"
+                                    <a href="<?php echo URLROOT; ?>/Pages/dashboard"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Dashboard</a>
                                     <a href="<?php echo URLROOT; ?>/CategoryController/GetAllCategories"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Categories</a>
                                     <a href="<?php echo URLROOT; ?>/CategoryController/getCategorie_sTags"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Tags</a>
-                                    <a href="<?php echo URLROOT; ?>/WikiController/index"
+                                    <a href="<?php echo URLROOT; ?>/Pages/index"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Accueil</a>
                                     <a href="<?php echo URLROOT; ?>/UserController/LogOut"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Log out</a>
@@ -83,8 +79,10 @@
 
                                 <?php elseif (isset($_SESSION['user_role']) && $_SESSION['user_role'] == "auteur"): ?>
 
-                                    <a href="<?php echo URLROOT; ?>/WikiController/index"
+                                    <a href="<?php echo URLROOT; ?>/Pages/index"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Accueil</a>
+                                        <a href="<?php echo URLROOT; ?>/Pages/PageCategories"
+                                        class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Categories</a>
                                     <a href="<?php echo URLROOT; ?>/WikiController/index/addForm"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Add new
                                         wiki</a>
@@ -95,6 +93,10 @@
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Log out</a>
 
                                 <?php else: ?>
+                                    <a href="<?php echo URLROOT; ?>/Pages/index"
+                                        class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Accueil</a>
+                                    <a href="<?php echo URLROOT; ?>/Pages/GetAllCategories"
+                                        class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Categories</a>
                                     <a href="<?php echo URLROOT; ?>/Pages/AuthLogin"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Login</a>
                                     <a href="<?php echo URLROOT; ?>/Pages/AuthRegister"

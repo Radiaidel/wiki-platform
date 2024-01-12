@@ -16,37 +16,6 @@ class WikiController extends Controller
         $this->userModel = $this->model('User');
         
     }
-
-
-    public function index()
-    {
-        $wikis = $this->wikiModel->getAllWikis();
-
-        $categories = $this->CategoryModel->getAllCategories();
-
-        $categoryTags = [];
-        foreach ($categories as $category) {
-            $tags = $this->tagModel->getTagsByCategory($category->category_id);
-            $categoryTags[$category->category_id] = $tags;
-        }
-
-        $data = [
-            'categories' => $categories,
-            'categoryTags' => $categoryTags,
-            'wikis' => $wikis,
-        ];
-        $this->view('Pages/index', $data);
-
-        if (isset($_GET['url']) && $_GET['url'] === 'WikiController/index/addForm') {
-
-            echo '<script >
-            document.getElementById("AddWiki").classList.remove("hidden");
-            document.getElementById("closeModalBtnwiki").addEventListener("click", function() {
-                document.getElementById("AddWiki").classList.add("hidden");
-            });
-          </script>';
-        }
-    }
     
 
     public function Mywikis()
@@ -67,20 +36,6 @@ class WikiController extends Controller
             'wikis' => $wikis,
         ];
         $this->view('Pages/MyWikis', $data);
-    }
-    public function singleWiki($wikiId)
-    {
-        $wikiDetails = $this->wikiModel->getWikiById($wikiId);
-
-        if ($wikiDetails) {
-            $data = [
-                'wiki' => $wikiDetails,
-            ];
-
-            $this->view('pages/single_wiki', $data);
-        } else {
-            echo "Wiki not found!";
-        }
     }
     public function AddNewWiki()
     {
@@ -206,34 +161,5 @@ class WikiController extends Controller
         header("Location: " . URLROOT . "/WikiController/index");
         exit();
     }
-    public function search() {
-        // Check if it's an AJAX request
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['searchTerm'])) {
-            $searchTerm = $_POST['searchTerm'];
-    
-            $searchResults = $this->searchWikiTagCategory($searchTerm);
-    
-            echo json_encode($searchResults);
-            exit;
-        }
 
-    }
-
-    public function searchWikiTagCategory($searchTerm) {
-        $searchResults = [];
-    
-        // Search by Wiki
-        $wikiResults = $this->wikiModel->searchWiki($searchTerm);
-        $searchResults['wikis'] = $wikiResults;
-    
-        // Search by Tag
-        $tagResults = $this->wikiModel->searchTag($searchTerm);
-        $searchResults['tags'] = $tagResults;
-    
-        // Search by Category
-        $categoryResults = $this->wikiModel->searchCategory($searchTerm);
-        $searchResults['categories'] = $categoryResults;
-    
-        return $searchResults;
-    }
 }

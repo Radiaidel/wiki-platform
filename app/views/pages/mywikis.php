@@ -163,7 +163,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="w-full text-white bg-gray-500 rounded-full text-sm px-5 py-2.5">Edit
+                <button type="submit" class="w-full text-white bg-green-600 rounded-md text-sm px-5 py-2.5">Edit
                     wiki</button>
             </form>
         </div>
@@ -222,12 +222,4 @@
         });
 
     });
-    function ToDetailWiki(element) {
-        // Retrieve the wiki ID from the data attribute
-        var wikiId = element.getAttribute('data-wiki-id');
-        // Assuming you have the wiki ID, use it to construct the URL
-        var wikiUrl = "<?php echo URLROOT . '/WikiController/singleWiki/'; ?>" + wikiId;
-        // Redirect to the constructed URL
-        window.location.href = wikiUrl;
-    }
 </script>

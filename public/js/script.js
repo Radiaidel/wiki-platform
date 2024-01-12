@@ -6,7 +6,6 @@ function dismissMessage() {
         messageContainer.style.display = 'none';
     }
 }
-
 function validateFormRegister() {
     let isValid = true;
 
@@ -43,8 +42,6 @@ function validateFormRegister() {
 
     return isValid;
 }
-
-
 function displayImage(onlabel, inInput) {
     var input = document.getElementById(inInput);
     var label = document.getElementById(onlabel);
@@ -66,7 +63,6 @@ function displayImage(onlabel, inInput) {
         reader.readAsDataURL(file);
     }
 }
-
 function validateFormLogin() {
     let isValid = true;
 
@@ -93,7 +89,6 @@ function validateFormLogin() {
 
     return isValid;
 }
-
 function toggleDropdown() {
     var dropdownContent = document.getElementById('dropdown-content');
     dropdownContent.classList.toggle('hidden');
@@ -104,7 +99,6 @@ function ShowForm(formname, closeModal) {
         document.getElementById(formname).classList.add('hidden');
     });
 }
-
 function confirmDelete(formid) {
     var result = confirm("Are you sure you want to delete this category?");
 
@@ -114,7 +108,6 @@ function confirmDelete(formid) {
         event.preventDefault();
     }
 }
-
 function GetButton(classbtn, functionshow) {
     document.querySelectorAll(classbtn).forEach(button => {
         button.addEventListener('click', function () {
@@ -149,8 +142,6 @@ function ShowEditForm(button) {
         document.getElementById('PlusIcon').style.display = 'none';
     }
 }
-
-
 function ShowTagDetailsForm(tagElement) {
     document.getElementById('closeTagDetails').addEventListener('click', () => {
         document.getElementById('TagDetails').classList.add('hidden');
@@ -169,7 +160,6 @@ function ShowTagDetailsForm(tagElement) {
     document.getElementById('TagDetails').classList.remove('hidden');
 
 }
-
 function confirmDeleteWiki(formid) {
     var result = confirm("Are you sure you want to delete this Wiki?");
 
@@ -179,7 +169,6 @@ function confirmDeleteWiki(formid) {
         event.preventDefault();
     }
 }
-
 function ShowEditWikiForm(button) {
     document.getElementById('closeBtnEditWiki').addEventListener('click', () => {
         document.getElementById('EditWiki').classList.add('hidden');
@@ -207,8 +196,6 @@ function ShowEditWikiForm(button) {
     }
 
 }
-
-
 function displayImageforEdit(inputId, url) {
     const inputElement = document.getElementById(inputId);
     const urlParts = url.split('/upload/'); 
@@ -217,8 +204,6 @@ function displayImageforEdit(inputId, url) {
     inputElement.previousElementSibling.textContent = fileName; 
     inputElement.value = ''; 
 }
-
-
 function displayTagsForEdit(inputId, containerId, tags) {
     const selectedTagsInput = document.getElementById(inputId);
     const tagsContainer = document.getElementById(containerId);
@@ -248,7 +233,6 @@ function displayTagsForEdit(inputId, containerId, tags) {
         }
     });
 }
-
 function validateCategoryName(categoryName) {
     return categoryName.trim() !== '';
 }

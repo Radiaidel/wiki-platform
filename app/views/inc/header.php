@@ -83,7 +83,7 @@
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Accueil</a>
                                         <a href="<?php echo URLROOT; ?>/Pages/PageCategories"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Categories</a>
-                                    <a href="<?php echo URLROOT; ?>/WikiController/index/addForm"
+                                    <a href="<?php echo URLROOT; ?>/Pages/index/addForm"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Add new
                                         wiki</a>
                                     <a href="<?php echo URLROOT; ?>/WikiController/Mywikis"
@@ -95,7 +95,7 @@
                                 <?php else: ?>
                                     <a href="<?php echo URLROOT; ?>/Pages/index"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Accueil</a>
-                                    <a href="<?php echo URLROOT; ?>/Pages/GetAllCategories"
+                                        <a href="<?php echo URLROOT; ?>/Pages/PageCategories"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Categories</a>
                                     <a href="<?php echo URLROOT; ?>/Pages/AuthLogin"
                                         class="block hover:bg-gray-100 px-4 py-2 text-sm text-gray-700">Login</a>

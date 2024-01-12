@@ -122,54 +122,51 @@ class Pages extends Controller
   {
     $wikiModel = $this->model('Wiki');
 
-      $wikiDetails = $wikiModel->getWikiById($wikiId);
+    $wikiDetails = $wikiModel->getWikiById($wikiId);
 
-      if ($wikiDetails) {
-          $data = [
-              'wiki' => $wikiDetails,
-          ];
+    if ($wikiDetails) {
+      $data = [
+        'wiki' => $wikiDetails,
+      ];
 
-          $this->view('pages/single_wiki', $data);
-      } else {
-          echo "Wiki not found!";
-      }
+      $this->view('pages/single_wiki', $data);
+    } else {
+      echo "Wiki not found!";
+    }
   }
 
-  // public function search() {
-//   // Check if it's an AJAX request
-//   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['searchTerm'])) {
-//       $searchTerm = $_POST['searchTerm'];
+  // public function search()
+  // {
+  //   // Check if it's an AJAX request
+  //   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['searchTerm'])) {
+  //     $searchTerm = $_POST['searchTerm'];
 
-  //       $searchResults = $this->searchWikiTagCategory($searchTerm);
+  //     $searchResults = $this->searchWikiTagCategory($searchTerm);
 
-  //       echo json_encode($searchResults);
-//       exit;
-//   }
+  //     echo json_encode($searchResults);
+  //     exit;
+  //   }
 
   // }
 
-  // public function searchWikiTagCategory($searchTerm) {
-//   $searchResults = [];
+  // public function searchWikiTagCategory($searchTerm)
+  // {
+  //   $searchResults = [];
 
   //   // Search by Wiki
-//   $wikiResults = $this->wikiModel->searchWiki($searchTerm);
-//   $searchResults['wikis'] = $wikiResults;
+  //   $wikiResults = $this->wikiModel->searchWiki($searchTerm);
+  //   $searchResults['wikis'] = $wikiResults;
 
   //   // Search by Tag
-//   $tagResults = $this->wikiModel->searchTag($searchTerm);
-//   $searchResults['tags'] = $tagResults;
+  //   $tagResults = $this->wikiModel->searchTag($searchTerm);
+  //   $searchResults['tags'] = $tagResults;
 
   //   // Search by Category
-//   $categoryResults = $this->wikiModel->searchCategory($searchTerm);
-//   $searchResults['categories'] = $categoryResults;
+  //   $categoryResults = $this->wikiModel->searchCategory($searchTerm);
+  //   $searchResults['categories'] = $categoryResults;
 
   //   return $searchResults;
-// }
-
-
-
-
-
+  // }
 
   //   public function categorie()
 //   {
@@ -179,5 +176,36 @@ class Pages extends Controller
 //   {
 //     $this->view('pages/tags');
 //   }
+
+
+
+
+  public function search()
+  {
+    $searchTerm = $_POST['searchTerm'];
+    $context = $_POST['context'];
+    $searchResults = [];
+
+
+    $CategoryModel = $this->model('Category');
+    $wikiModel = $this->model('Wiki');
+    $tagModel = $this->model('Tags');
+   
+    switch ($context) {
+      case 'categories':
+        $searchResults = $CategoryModel->searchCategories($searchTerm);
+        break;
+      case 'tags':
+        $searchResults = $tagModel->searchTags($searchTerm);
+        break;
+      default:
+    
+        $searchResults =$wikiModel->searchAllData($searchTerm);
+      break;
+    }
+
+    echo json_encode($searchResults); 
+  }
+
 
 }

@@ -13,5 +13,4 @@
 
         </div>
     <?php endforeach; ?>
-</div>
-<?php require APPROOT . '/views/inc/footer.php'; ?>
+</div>     <?php require APPROOT . '/views/inc/footer.php'; ?>

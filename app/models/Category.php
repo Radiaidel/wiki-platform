@@ -56,5 +56,10 @@ class Category
         $this->db->query('SELECT COUNT(*) as count FROM categories');
         return $this->db->single()->count;
     }
+    public function searchCategories($searchTerm) {
+        $this->db->query("SELECT * FROM Categories WHERE category_name LIKE :searchTerm");
+        $this->db->bind(':searchTerm', '%' . $searchTerm . '%');
+        return $this->db->resultSet();
+    }
 }
 ?>

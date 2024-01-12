@@ -66,11 +66,11 @@ class UserController extends Controller
 
                 $_SESSION['message'] = ['type' => 'success', 'text' => 'Login successful.'];
                 if ($_SESSION['user_role'] == "admin") {
-                    header('Location: ' . URLROOT . '/WikiController/dashboard');
+                    header('Location: ' . URLROOT . '/Pages/dashboard');
                     exit();
                 } elseif ($_SESSION['user_role'] == "auteur") {
 
-                    header('Location: ' . URLROOT . '/WikiController/index');
+                    header('Location: ' . URLROOT . '/Pages/index');
                 }
                 exit();
             } else {
@@ -89,7 +89,7 @@ class UserController extends Controller
 
         session_destroy();
 
-        header('Location: ' . URLROOT . '/WikiController/index');
+        header('Location: ' . URLROOT . '/Pages/index');
         exit();
     }
 

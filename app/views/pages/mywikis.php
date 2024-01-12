@@ -3,10 +3,14 @@
 <?php require APPROOT . '/views/inc/messages.php'; ?>
 
 <div class="p-2 md:p-12">
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
-        <?php foreach ($data['wikis'] as $wiki): ?>
-            <div class="cursor-pointer mb-4 p-6 rounded-xl bg-white flex flex-col">                            
+    <?php if (empty($data['wikis'])): ?>
+        <div class="flex items-center justify-center">
+            <p class="text-xl font-semibold text-gray-600">No wikis found.</p>
+        </div>
+    <?php else: ?>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
+            <?php foreach ($data['wikis'] as $wiki): ?>
+                <div class="cursor-pointer mb-4 p-6 rounded-xl bg-white flex flex-col">
                     <div class="flex pb-4 items-center justify-between">
                         <div class="flex items-center space-x-4">
                             <a href="#" class="inline-block">
@@ -69,8 +73,7 @@
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
                                                 d="M18 6V16.2C18 17.8802 18 18.7202 17.673 19.362C17.3854 19.9265 16.9265 20.3854 16.362 20.673C15.7202 21 14.8802 21 13.2 21H10.8C9.11984 21 8.27976 21 7.63803 20.673C7.07354 20.3854 6.6146 19.9265 6.32698 19.362C6 18.7202 6 17.8802 6 16.2V6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6"
-                                                stroke="#000000" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round" />
+                                                stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </button>
                                 </form>
@@ -105,11 +108,13 @@
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
-            </div>
-        <?php endforeach; ?>
+                </div>
+            <?php endforeach; ?>
 
 
-    </div>
+        </div>
+    <?php endif; ?>
+
 
 
 
@@ -139,12 +144,14 @@
                     <div class="mb-4">
                         <label for="editTitle" class="block text-sm font-medium text-gray-600 mb-1">Title:</label>
                         <input type="text" id="editTitle" name="editTitle" class="p-2 w-full border rounded-md">
+                        <div id="titleError" class="text-red-500 text-sm"></div>
                     </div>
 
                     <!-- Content -->
                     <div class="mb-4">
                         <label for="editContent" class="block text-sm font-medium text-gray-600 mb-1">Content:</label>
                         <textarea id="editContent" name="editContent" class="p-2 w-full  border rounded-md"></textarea>
+                        <div id="contentError" class="text-red-500 text-sm"></div>
                     </div>
 
                     <label for="editCategoryId" class="block text-sm font-medium text-gray-600 mb-1">Select
@@ -159,6 +166,7 @@
                     </select>
                     <label for="editSelectedTags" class="block text-sm font-medium text-gray-600 mb-1">Tag Name:</label>
                     <input type="hidden" id="editSelectedTagsInput" name="editSelectedTags" value="">
+                    <div id="tagsError" class="text-red-500 text-sm"></div>
                     <div id="editTagsContainer" class=" space-x-3 space-y-2">
                     </div>
                 </div>
@@ -221,5 +229,34 @@
 
         });
 
+
+
+
+
+        document.getElementById("editWikiForm").addEventListener("submit", function (event) {
+
+            const titleError = document.getElementById("titleError");
+            const contentError = document.getElementById("contentError");
+            const tagsError = document.getElementById("tagsError");
+
+            titleError.textContent = "";
+            contentError.textContent = "";
+            tagsError.textContent = "";
+
+
+
+            const titleInput = document.getElementById("editTitle");
+            if (titleInput.value.length < 5) {
+                titleError.textContent = "Erreur : Le titre doit comporter au moins 5 caractères.";
+                event.preventDefault();
+            }
+
+            const contentInput = document.getElementById("editContent");
+            if (contentInput.value.length < 5) {
+                contentError.textContent = "Erreur : Le contenu ne peut pas être vide.";
+                event.preventDefault();
+            }
+
+        });
     });
 </script>

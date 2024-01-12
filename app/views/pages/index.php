@@ -242,29 +242,6 @@
             }
         });
 
-
-        const searchInput = document.getElementById('searchInput');
-        const searchResultsContainer = document.getElementById('searchResults');
-
-        searchInput.addEventListener('input', function () {
-            const searchTerm = searchInput.value;
-
-            if (searchTerm.length >= 3) {
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', '<?php echo URLROOT; ?>/WikiController/search', true);
-                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        searchResultsContainer.innerHTML = xhr.responseText;
-                    }
-                };
-
-                xhr.send('searchTerm=' + searchTerm);
-            } else {
-                searchResultsContainer.innerHTML = '';
-            }
-        });
     });
     function ToDetailWiki(element) {
     var wikiId = element.getAttribute('data-wiki-id');

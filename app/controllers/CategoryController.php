@@ -79,7 +79,6 @@ class CategoryController extends Controller
                     header('Location: ' . URLROOT . '/CategoryController/GetAllCategories');
                 }
             } else {
-                // Gestion des erreurs d'upload
                 $_SESSION['message'] = ['type' => 'error', 'text' => 'No file uploaded.'];
                 header('Location: ' . URLROOT . '/CategoryController/GetAllCategories');
             }

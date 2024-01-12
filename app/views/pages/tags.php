@@ -15,11 +15,11 @@
                 <h2 class="text-xl font-bold mb-4 text-center">
                     <?php echo htmlspecialchars($categoryName); ?>
                 </h2>
-                <div class="flex flex-row items-center space-x-3 space-y-2">                
+                <div class="flex flex-row flex-wrap items-center space-x-3 space-y-2">                
                      <?php
                     foreach ($categoryData['tags'] as $tag) {
                         ?>
-                        <a onclick="ShowTagDetailsForm(this)" class="tagsLabel bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium me-2 cursor-pointer px-3 py-1
+                        <a onclick="ShowTagDetailsForm(this)" class="tagsLabel bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium  cursor-pointer px-3 py-1
                             rounded border border-blue-400  items-center justify-center"
                             data-tag-id="<?php echo $tag->tag_id; ?>"
                             data-tag-name="<?php echo htmlspecialchars($tag->tag_name); ?>"

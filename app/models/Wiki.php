@@ -174,4 +174,19 @@ class Wiki
         $this->db->query('SELECT COUNT(*) as count FROM wikis');
         return $this->db->single()->count;
     }
+
+    public function searchAllData($searchTerm) {
+        $this->db->query("
+        SELECT Wikis.*, Users.username, Users.profile_picture, Categories.category_name, GROUP_CONCAT(Tags.tag_name) AS tag_names
+        FROM Wikis
+        JOIN Users ON Wikis.author_id = Users.user_id
+        JOIN Categories ON Wikis.category_id = Categories.category_id
+        LEFT JOIN WikiTags ON Wikis.wiki_id = WikiTags.wiki_id
+        LEFT JOIN Tags ON WikiTags.tag_id = Tags.tag_id
+        WHERE title LIKE :searchTerm OR content LIKE :searchTerm OR category_name   LIKE :searchTerm
+        GROUP BY Wikis.wiki_id
+        ORDER BY Wikis.updated_at DESC;");
+        $this->db->bind(':searchTerm', '%' . $searchTerm . '%');
+        return $this->db->resultSet();
+    }
 }

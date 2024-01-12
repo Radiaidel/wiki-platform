@@ -46,6 +46,10 @@ class Tags
         $this->db->query('SELECT COUNT(*) as count FROM tags');
         return $this->db->single()->count;
     }
- 
+    public function searchTags($searchTerm) {
+        $this->db->query("SELECT * FROM Tags WHERE tag_name LIKE :searchTerm");
+        $this->db->bind(':searchTerm', '%' . $searchTerm . '%');
+        return $this->db->resultSet();
+    }
 }
 ?>

@@ -7,12 +7,10 @@
         <div class="grid grid-cols-12 gap-6 mt-5">
             <a class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white p-5" href="#">
                 <div class="flex justify-end">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-400" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                    </svg>
+                    <img src="<?php echo URLROOT . '/public/upload/categorie.png' ?> " width="30" alt="">
+
                 </div>
+
                 <div class="ml-2 w-full flex-1">
                     <div>
                         <div class="mt-3 text-3xl font-bold ">
@@ -22,73 +20,69 @@
                     </div>
                 </div>
             </a>
-        <a class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white p-5" href="#">
-            <div class="flex justify-end">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-400" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                </svg>
-            </div>
-            <div class="ml-2 w-full flex-1">
-                <div>
-                    <div class="mt-3 text-3xl font-bold ">
-                        <?php echo $data['wikiCount']; ?>
-                    </div>
-                    <div class="mt-1 text-base text-gray-600">Total wikis</div>
+            <a class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white p-5" href="#">
+                <div class="flex justify-end">
+                    <img src="<?php echo URLROOT . '/public/upload/wiki.png' ?> " width="30" alt="">
+
                 </div>
-            </div>
-        </a>
-        <a class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white p-5" href="#">
-            <div class="flex justify-end">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-400" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                </svg>
-            </div>
-            <div class="ml-2 w-full flex-1">
-                <div>
-                    <div class="mt-3 text-3xl font-bold ">
-                        <?php echo $data['tagCount']; ?>
+                <div class="ml-2 w-full flex-1">
+                    <div>
+                        <div class="mt-3 text-3xl font-bold ">
+                            <?php echo $data['wikiCount']; ?>
+                        </div>
+                        <div class="mt-1 text-base text-gray-600">Total wikis</div>
                     </div>
-                    <div class="mt-1 text-base text-gray-600">Total tags</div>
                 </div>
-            </div>
-        </a>
-        <a class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white p-5" href="#">
-            <div class="flex justify-end">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-blue-400" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                </svg>
-            </div>
-            <div class="ml-2 w-full flex-1">
-                <div>
-                    <div class="mt-3 text-3xl font-bold ">
-                        <?php echo $data['userCount']; ?>
+            </a>
+            <a class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white p-5" href="#">
+                <div class="flex justify-end">
+                    <img src="<?php echo URLROOT . '/public/upload/etiquette-detiquette.png' ?> " width="30" alt="">
+                </div>
+                <div class="ml-2 w-full flex-1">
+                    <div>
+                        <div class="mt-3 text-3xl font-bold ">
+                            <?php echo $data['tagCount']; ?>
+                        </div>
+                        <div class="mt-1 text-base text-gray-600">Total tags</div>
                     </div>
-                    <div class="mt-1 text-base text-gray-600">Total users</div>
                 </div>
-            </div>
-        </a>
+            </a>
+            <a class="shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white p-5" href="#">
+                <div class="flex justify-end">
+                    <img src="<?php echo URLROOT . '/public/upload/users.png' ?> " width="60" alt="">
+
+                </div>
+                <div class="ml-2 w-full flex-1">
+                    <div>
+                        <div class="mt-3 text-3xl font-bold ">
+                            <?php echo $data['userCount']; ?>
+                        </div>
+                        <div class="mt-1 text-base text-gray-600">Total users</div>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
-</div>
-<div class="col-span-12 mt-5">
+    <div class="col-span-12 mt-5">
+    <div class="col-span-12 mt-5">
+    <div class="col-span-12 mt-5">
     <div class="grid gap-6 grid-cols-1 md:grid-cols-2">
-        <canvas class="bg-white shadow-lg p-4 md:w-1/2 chart-container" id="ChartDoughnut"></canvas>
-        <canvas class="bg-white shadow-lg p-4 md:w-1/2 chart-container" id="chartline"></canvas>
+        <div class="bg-white shadow-lg p-4 chart-container w-full h-50">
+            <canvas id="ChartDoughnut" class="w-full h-full"></canvas>
+        </div>
+        <div class="bg-white shadow-lg p-4 chart-container w-full h-50">
+            <canvas id="chartline" class="w-full h-full"></canvas>
+        </div>
     </div>
 </div>
+
+
 
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // In your main script.js file or inline in dashboard/index.php
     document.addEventListener("DOMContentLoaded", function () {
-        // Fetch data from PHP
         const chartDataLabels = <?php echo json_encode($data['chartData']['labels'] ?? []); ?>;
         const chartDataValues = <?php echo json_encode($data['chartData']['values'] ?? []); ?>;
         const canvas = document.getElementById('ChartDoughnut');
@@ -101,16 +95,13 @@
                     labels: chartDataLabels,
                     datasets: [{
                         data: chartDataValues,
-                        backgroundColor: ['red', 'blue', 'green', 'yellow'],
+                        backgroundColor: ['#fde047', '#10b981', '#06b6d4', '#f43f5e'],
                     }]
                 },
             });
         } else {
             console.error("Canvas or its context is not available.");
         }
-
-
-
 
         const lineChartDataLabels = <?php echo json_encode($data['lineChartData']['labels']); ?>;
         const lineChartDataValues = <?php echo json_encode($data['lineChartData']['values']); ?>;
@@ -125,7 +116,7 @@
                     datasets: [{
                         label: 'Number of Wikis',
                         data: lineChartDataValues,
-                        borderColor: 'blue',
+                        borderColor: '#0284c7',
                         borderWidth: 2,
                         fill: false,
                     }],

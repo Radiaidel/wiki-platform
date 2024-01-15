@@ -113,7 +113,6 @@
                     </label>
                     <input type="file" id="categorypicture" name="categorypicture" accept="image/*" class="hidden"
                         onchange="displayImage('categorypic','categorypicture')" >
-                    <!-- Category Name Input -->
                     <input type="text" id="categoryName" name="categoryName" placeholder="name"
                         class="p-2 w-full border border-2 border-gray-600 rounded-md "  />
                 </div>

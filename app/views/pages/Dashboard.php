@@ -64,68 +64,90 @@
         </div>
     </div>
     <div class="col-span-12 mt-5">
-    <div class="col-span-12 mt-5">
-    <div class="col-span-12 mt-5">
-    <div class="grid gap-6 grid-cols-1 md:grid-cols-2">
-        <div class="bg-white shadow-lg p-4 chart-container w-full h-50">
-            <canvas id="ChartDoughnut" class="w-full h-full"></canvas>
+        <div class="col-span-12 mt-5">
+            <div class="col-span-12 mt-5">
+                <div class="grid gap-6 grid-cols-1 md:grid-cols-2">
+                    <div class="bg-white shadow-lg p-4 chart-container w-full h-50">
+                        <canvas id="ChartDoughnut" class="w-full h-full"></canvas>
+                    </div>
+                    <div class="bg-white shadow-lg p-4 chart-container w-full h-50">
+                        <canvas id="chartline" class="w-full h-full"></canvas>
+                    </div>
+                </div>
+            </div>
+
+
+
+
         </div>
-        <div class="bg-white shadow-lg p-4 chart-container w-full h-50">
-            <canvas id="chartline" class="w-full h-full"></canvas>
-        </div>
-    </div>
-</div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const chartDataLabels = <?php echo json_encode($data['chartData']['labels'] ?? []); ?>;
+                const chartDataValues = <?php echo json_encode($data['chartData']['values'] ?? []); ?>;
+
+                const canvas = document.getElementById('ChartDoughnut');
+                if (canvas && canvas.getContext) {
+                    const ctx = canvas.getContext('2d');
+
+                    const myDoughnutChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: chartDataLabels,
+                            datasets: [{
+                                data: chartDataValues,
+                                backgroundColor: ['#fde047', '#10b981', '#06b6d4', '#f43f5e'],
+                            }]
+                        },
+                    });
+                } else {
+                    console.error("Canvas or its context is not available.");
+                }
+
+                const lineChartDataLabels = <?php echo json_encode($data['lineChartData']['labels']); ?>;
+                const lineChartDataValues = <?php echo json_encode($data['lineChartData']['values']); ?>;
 
 
+                function isInteger(value) {
+                    return Number.isInteger(value);
+                }
 
+                const lineCanvas = document.getElementById('chartline');
+                if (lineCanvas && lineCanvas.getContext) {
+                    const lineCtx = lineCanvas.getContext('2d');
 
-</div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const chartDataLabels = <?php echo json_encode($data['chartData']['labels'] ?? []); ?>;
-        const chartDataValues = <?php echo json_encode($data['chartData']['values'] ?? []); ?>;
-        const canvas = document.getElementById('ChartDoughnut');
-        if (canvas && canvas.getContext) {
-            const ctx = canvas.getContext('2d');
-
-            const myDoughnutChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: chartDataLabels,
-                    datasets: [{
-                        data: chartDataValues,
-                        backgroundColor: ['#fde047', '#10b981', '#06b6d4', '#f43f5e'],
-                    }]
-                },
+                    const myLineChart = new Chart(lineCtx, {
+                        type: 'line',
+                        data: {
+                            labels: lineChartDataLabels,
+                            datasets: [{
+                                label: 'Number of Wikis',
+                                data: lineChartDataValues,
+                                borderColor: '#0284c7',
+                                borderWidth: 2,
+                                fill: false,
+                            }],
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    ticks: {
+                                        stepSize: 1, 
+                                        callback: function (value) {
+                                            if (Number.isInteger(value)) {
+                                                return value;
+                                            }
+                                            return ''; 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    console.error("Line Canvas or its context is not available.");
+                }
             });
-        } else {
-            console.error("Canvas or its context is not available.");
-        }
 
-        const lineChartDataLabels = <?php echo json_encode($data['lineChartData']['labels']); ?>;
-        const lineChartDataValues = <?php echo json_encode($data['lineChartData']['values']); ?>;
-        const lineCanvas = document.getElementById('chartline');
-        if (lineCanvas && lineCanvas.getContext) {
-            const lineCtx = lineCanvas.getContext('2d');
-
-            const myLineChart = new Chart(lineCtx, {
-                type: 'line',
-                data: {
-                    labels: lineChartDataLabels,
-                    datasets: [{
-                        label: 'Number of Wikis',
-                        data: lineChartDataValues,
-                        borderColor: '#0284c7',
-                        borderWidth: 2,
-                        fill: false,
-                    }],
-                },
-            });
-        } else {
-            console.error("Line Canvas or its context is not available.");
-        }
-    });
-
-</script>
-<?php require APPROOT . '/views/inc/footer.php'; ?>
+        </script>
+        <?php require APPROOT . '/views/inc/footer.php'; ?>

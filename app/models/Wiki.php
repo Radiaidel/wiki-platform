@@ -129,7 +129,6 @@ class Wiki
     }
 
     public function WikisByDate() {
-        // Assuming you have a 'created_at' column in your 'Wikis' table
         $this->db->query('
             SELECT DATE(created_at) as date, COUNT(*) as count
             FROM Wikis
@@ -183,7 +182,7 @@ class Wiki
         JOIN Categories ON Wikis.category_id = Categories.category_id
         LEFT JOIN WikiTags ON Wikis.wiki_id = WikiTags.wiki_id
         LEFT JOIN Tags ON WikiTags.tag_id = Tags.tag_id
-        WHERE title LIKE :searchTerm OR content LIKE :searchTerm OR category_name   LIKE :searchTerm
+        WHERE archived=0 AND (title LIKE :searchTerm OR content LIKE :searchTerm OR category_name   LIKE :searchTerm)
         GROUP BY Wikis.wiki_id
         ORDER BY Wikis.updated_at DESC;");
         $this->db->bind(':searchTerm', '%' . $searchTerm . '%');

@@ -109,72 +109,71 @@
         </div>
     </nav>
 
-    <div id="searchResults" class ="p-4 m-auto"></div>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.getElementById('searchInput');
-    const searchResultsContainer = document.getElementById('searchResults');
+    <div id="searchResults" class="p-4 m-auto"></div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById('searchInput');
+            const searchResultsContainer = document.getElementById('searchResults');
 
-    searchInput.addEventListener('input', function () {
-        const searchTerm = searchInput.value;
-        const context = getContext();
-        if (searchTerm.length >= 3) {
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', '<?php echo URLROOT; ?>/Pages/search', true);
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            searchInput.addEventListener('input', function () {
+                const searchTerm = searchInput.value;
+                const context = getContext();
+                if (searchTerm.length >= 3) {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', '<?php echo URLROOT; ?>/Pages/search', true);
+                    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    showResults(JSON.parse(xhr.responseText), context);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            showResults(JSON.parse(xhr.responseText), context);
+                        }
+                    };
+
+                    xhr.send('searchTerm=' + searchTerm + '&context=' + context);
+                } else {
+                    hideResults();
                 }
-            };
+            });
 
-            xhr.send('searchTerm=' + searchTerm + '&context=' + context);
-        } else {
-            hideResults();
-        }
-    });
+            function getContext() {
+                const currentUrl = window.location.href;
+                if (currentUrl.includes("Categories")) {
+                    return "categories";
+                } else if (currentUrl.includes("Tags")) {
+                    return "tags";
+                } else {
+                    return "accueil";
+                }
+            }
 
-    function getContext() {
-        const currentUrl = window.location.href;
-        if (currentUrl.includes("Categories")) {
-            return "categories";
-        } else if (currentUrl.includes("Tags")) {
-            return "tags";
-        } else {
-            return "accueil";
-        }
-    }
+            function showResults(results, context) {
+                searchResultsContainer.innerHTML = '';
+                if (results.length === 0) {
+                    searchResultsContainer.innerHTML = `<div class="text-center text-gray-500 py-4">Aucun résultat trouvé.</div>`;
+                    return;
+                }
 
-    function showResults(results, context) {
-        searchResultsContainer.innerHTML = ''; // Clear previous results
-        if (results.length === 0) {
-        // Display a message when there are no search results
-        searchResultsContainer.innerHTML = `<div class="text-center text-gray-500 py-4">Aucun résultat trouvé.</div>`;
-        return;
-    }
+                switch (context) {
+                    case 'categories':
+                        displayCategories(results);
+                        break;
+                    case 'tags':
+                        displayTags(results);
+                        break;
+                    default:
+                        displayWikis(results);
+                        break;
+                }
+            }
 
-        switch (context) {
-            case 'categories':
-                displayCategories(results);
-                break;
-            case 'tags':
-                displayTags(results);
-                break;
-            default:
-                displayWikis(results);
-                break;
-        }
-    }
+            function hideResults() {
+                searchResultsContainer.innerHTML = '';
+            }
 
-    function hideResults() {
-        searchResultsContainer.innerHTML = '';
-    }
+            function displayCategories(categories) {
+                const URLROOT = <?php echo json_encode(URLROOT); ?>;
 
-    function displayCategories(categories) {
-        const URLROOT = <?php echo json_encode(URLROOT); ?>;
-
-    const html = categories.map(category => `
+                const html = categories.map(category => `
         <div class="bg-white p-4 rounded-md shadow-md flex items-center justify-between">
             <div class="flex items-center space-x-4">
                 <img class="w-16 h-16" src="${URLROOT}/public/${category.category_picture}" alt="User" />
@@ -185,61 +184,61 @@
         </div>
     `).join('');
 
-    searchResultsContainer.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-12">${html}</div>`;
-}
+                searchResultsContainer.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-12">${html}</div>`;
+            }
 
-function displayWikis(wikis) {
-    const URLROOT = <?php echo json_encode(URLROOT); ?>;
+            function displayWikis(wikis) {
+                const URLROOT = <?php echo json_encode(URLROOT); ?>;
 
-    const html = wikis.map(wiki => `
-        <div class="cursor-pointer mb-4 p-6 rounded-xl bg-white flex flex-col" data-wiki-id="${wiki.wiki_id}" onclick="ToDetailWiki(this)">
-            <div class="flex pb-4 items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <a href="#" class="inline-block">
-                        <img src="${URLROOT}/public/${wiki.profile_picture}" alt="User" class="rounded-full w-10 h-10">
-                    </a>
-                    <div class="flex flex-col">
-                        <div class="flex items-center">
-                            <a href="#" class="inline-block text-sm font-bold mr-2">
-                                ${wiki.username}
-                            </a>
+                const html = wikis.map(wiki => `
+                    <div class="cursor-pointer mb-4 p-6 rounded-xl bg-white flex flex-col" data-wiki-id="${wiki.wiki_id}" onclick="ToDetailWiki(this)">
+                        <div class="flex pb-4 items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <a href="#" class="inline-block">
+                                    <img src="${URLROOT}/public/${wiki.profile_picture}" alt="User" class="rounded-full w-10 h-10">
+                                </a>
+                                <div class="flex flex-col">
+                                    <div class="flex items-center">
+                                        <a href="#" class="inline-block text-sm font-bold mr-2">
+                                            ${wiki.username}
+                                        </a>
+                                    </div>
+                                    <div class="text-slate-500 dark:text-slate-300 text-xs">
+                                        ${wiki.created_at}
+                                    </div>
+                                </div>
+                            </div>
+                    
                         </div>
-                        <div class="text-slate-500 dark:text-slate-300 text-xs">
-                            ${wiki.created_at}
+
+                        <!-- Wiki Content -->
+                        <h2 class="text-xl font-extrabold text-sm">
+                            ${wiki.title.substring(0, 70)}${wiki.title.length > 70 ? '...' : ''}
+                        </h2>
+                        <div class="py-4 text-sm">
+                            <p>
+                                ${wiki.content.substring(0, 100)}${wiki.content.length > 100 ? '...' : ''}
+                            </p>
                         </div>
-                    </div>
+
+                        ${wiki.tag_names ? `
+                <div class="flex space-x-2 text-sm text-gray-500">
+                    ${wiki.tag_names.split(',').map(tag => `
+                        <span class="bg-blue-200 text-blue-800 text-sm font-medium me-2 cursor-pointer px-3 py-1 rounded">
+                            #${tag.trim()}
+                        </span>
+                    `).join('')}
                 </div>
-        
-            </div>
+            ` : ''}
+                    </div>
+                `).join('');
 
-            <!-- Wiki Content -->
-            <h2 class="text-xl font-extrabold text-sm">
-                ${wiki.title.substring(0, 70)}${wiki.title.length > 70 ? '...' : ''}
-            </h2>
-            <div class="py-4 text-sm">
-                <p>
-                    ${wiki.content.substring(0, 100)}${wiki.content.length > 100 ? '...' : ''}
-                </p>
-            </div>
+                searchResultsContainer.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">${html}</div>`;
+            }
 
-            ${wiki.tag_names ? `
-    <div class="flex space-x-2 text-sm text-gray-500">
-        ${wiki.tag_names.split(',').map(tag => `
-            <span class="bg-blue-200 text-blue-800 text-sm font-medium me-2 cursor-pointer px-3 py-1 rounded">
-                #${tag.trim()}
-            </span>
-        `).join('')}
-    </div>
-` : ''}
-        </div>
-    `).join('');
+            function displayTags(tags) {
 
-    searchResultsContainer.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">${html}</div>`;
-}
-
-function displayTags(tags) {
-    
-    const html = tags.map(tag => `
+                const html = tags.map(tag => `
         <a onclick="ShowTagDetailsForm(this)" class="tagsLabel bg-blue-100 hover:bg-blue-200 text-blue-800 text-sm font-medium me-2 cursor-pointer px-3 py-1 rounded border border-blue-400 items-center justify-center"
             data-tag-id="${tag.tag_id}"
             data-tag-name="${tag.tag_name}"
@@ -248,8 +247,8 @@ function displayTags(tags) {
         </a>
     `).join('');
 
-    searchResultsContainer.innerHTML = `<div class="flex flex-row items-center space-x-3 space-y-2">${html}</div>`;
-}
+                searchResultsContainer.innerHTML = `<div class="flex flex-row items-center space-x-3 space-y-2">${html}</div>`;
+            }
 
-});
-</script>
+        });
+    </script>

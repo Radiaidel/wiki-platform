@@ -2,7 +2,7 @@
 
 <?php require APPROOT . '/views/inc/messages.php'; ?>
 
-<div class="relative  h-full flex items-center justify-center bg-center py-6 sm:px-6 lg:px-8  items-center">
+<div class="relative h-full flex items-center justify-center bg-center py-6 sm:px-6 lg:px-8  items-center">
 
 
 

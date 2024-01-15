@@ -7,9 +7,9 @@
 class Core
 {
   // Set Defaults
-  protected $currentController = 'WikiController'; // Default controller
+  protected $currentController = 'Pages'; // Default controller
   protected $currentMethod = 'index'; // Default method
-  protected $params = []; // Set initial empty params array
+  protected $params = []; 
 
   public function __construct()
   {

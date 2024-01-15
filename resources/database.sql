@@ -1,27 +1,40 @@
-CREATE TABLE `posts` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `body` text NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+create DATABASE wiki_platform_db;
+use wiki_platform_db;
+CREATE TABLE Users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255),
+    role VARCHAR(6)
+);
+CREATE TABLE Categories (
+    category_id INT PRIMARY KEY AUTO_INCREMENT,
+    category_name VARCHAR(255) UNIQUE
+);
+CREATE TABLE Tags (
+    tag_id INT PRIMARY KEY AUTO_INCREMENT,
+    tag_name VARCHAR(255) UNIQUE ,
+    category_id INT,
+    FOREIGN KEY (category_id) REFERENCES Categories(category_id) ON DELETE CASCADE
+);
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-ALTER TABLE `posts`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+CREATE TABLE Wikis (
+    wiki_id INT PRIMARY KEY AUTO_INCREMENT,
+    image_wiki VARCHAR(255),
+    title VARCHAR(255),
+    content TEXT,
+    author_id INT,
+    category_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    archived BOOLEAN DEFAULT 0, -- Indique si le wiki est archivé
+    FOREIGN KEY (author_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES Categories(category_id) ON DELETE CASCADE
+);
+CREATE TABLE WikiTags (
+    wiki_id INT,
+    tag_id INT,
+    PRIMARY KEY (wiki_id, tag_id),
+    FOREIGN KEY (wiki_id) REFERENCES Wikis(wiki_id) ON DELETE CASCADE,
+    FOREIGN KEY (tag_id) REFERENCES Tags(tag_id) ON DELETE CASCADE
+);

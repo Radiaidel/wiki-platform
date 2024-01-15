@@ -133,7 +133,7 @@ class Wiki
             SELECT DATE(created_at) as date, COUNT(*) as count
             FROM Wikis
             GROUP BY DATE(created_at)
-            ORDER BY DATE(created_at) DESC
+            ORDER BY DATE(created_at) ASC
         ');
     
         return $this->db->resultSet();

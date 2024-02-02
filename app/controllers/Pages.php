@@ -61,17 +61,16 @@ class Pages extends Controller
 
     $lineChartData = ['labels' => [], 'values' => []];
 
-    $result = $wikiModel->WikisByDate(); // Replace WikiModel with your actual model name
+    $result = $wikiModel->WikisByDate(); 
     foreach ($result as $row) {
       $lineChartData['labels'][] = $row->date;
       $lineChartData['values'][] = $row->count;
     }
 
-    // Additional counts
     $categoryCount = $CategoryModel->getCategoryCount();
-    $wikiCount = $wikiModel->getWikiCount(); // Replace with the actual method in your model
-    $tagCount = $tagModel->getTagCount(); // Replace with the actual method in your model
-    $userCount = $UserModel->getUserCount(); // Replace with the actual method in your model
+    $wikiCount = $wikiModel->getWikiCount();
+    $tagCount = $tagModel->getTagCount();
+    $userCount = $UserModel->getUserCount();
 
     $data = [
       'lineChartData' => $lineChartData,
@@ -82,7 +81,6 @@ class Pages extends Controller
       'userCount' => $userCount,
     ];
 
-    // Load the view (replace 'dashboard' with your actual view name)
     $this->view('pages/dashboard', $data);
   }
   public function index()
@@ -134,51 +132,6 @@ class Pages extends Controller
       echo "Wiki not found!";
     }
   }
-
-  // public function search()
-  // {
-  //   // Check if it's an AJAX request
-  //   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['searchTerm'])) {
-  //     $searchTerm = $_POST['searchTerm'];
-
-  //     $searchResults = $this->searchWikiTagCategory($searchTerm);
-
-  //     echo json_encode($searchResults);
-  //     exit;
-  //   }
-
-  // }
-
-  // public function searchWikiTagCategory($searchTerm)
-  // {
-  //   $searchResults = [];
-
-  //   // Search by Wiki
-  //   $wikiResults = $this->wikiModel->searchWiki($searchTerm);
-  //   $searchResults['wikis'] = $wikiResults;
-
-  //   // Search by Tag
-  //   $tagResults = $this->wikiModel->searchTag($searchTerm);
-  //   $searchResults['tags'] = $tagResults;
-
-  //   // Search by Category
-  //   $categoryResults = $this->wikiModel->searchCategory($searchTerm);
-  //   $searchResults['categories'] = $categoryResults;
-
-  //   return $searchResults;
-  // }
-
-  //   public function categorie()
-//   {
-//     $this->view('pages/category');
-//   }
-//   public function tag()
-//   {
-//     $this->view('pages/tags');
-//   }
-
-
-
 
   public function search()
   {
